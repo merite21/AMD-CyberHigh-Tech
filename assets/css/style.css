@@ -1772,6 +1772,38 @@ footer {
 
 .plan-price span { font-size: 0.9rem; color: var(--text-mute); font-weight: 500; }
 
+.price-convert {
+  font-size: 0.82rem;
+  color: var(--text-mute);
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+
+.price-note {
+  font-size: 12px;
+  color: var(--text-mute);
+  text-align: center;
+  margin-top: 36px;
+}
+
+.price-tag {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.price-tag .amount-fcfa {
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+  color: var(--cyan-300);
+}
+
+.price-tag .amount-convert {
+  font-size: 0.85rem;
+  color: var(--text-mute);
+  font-weight: 500;
+}
+
 /* ---------- Back to top ---------- */
 
 .back-to-top {

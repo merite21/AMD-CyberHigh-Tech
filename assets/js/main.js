@@ -1,4 +1,19 @@
+var FCFA_PER_EUR = 655.957;
+var FCFA_PER_USD = 610;
+
+function formatMoney(n, locale) {
+  return Math.round(n).toLocaleString(locale || "fr-FR");
+}
+
 document.addEventListener("DOMContentLoaded", function () {
+  document.querySelectorAll("[data-fcfa]").forEach(function (el) {
+    var amount = parseFloat(el.getAttribute("data-fcfa"));
+    if (isNaN(amount)) return;
+    var eur = amount / FCFA_PER_EUR;
+    var usd = amount / FCFA_PER_USD;
+    el.textContent = "≈ " + formatMoney(eur) + " € · " + formatMoney(usd) + " $";
+  });
+
   var root = document.documentElement;
   var themeToggle = document.querySelector(".theme-toggle");
   var storedTheme = null;
