@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Contact — AMD CyberHigh Tech</title>
-<meta name="description" content="Contactez AMD CyberHigh Tech pour un audit de sécurité gratuit ou pour discuter de votre prochain projet cloud, développement ou formation." />
+<title>Demande de devis — AMD CyberHigh Tech</title>
+<meta name="description" content="Décrivez votre projet et recevez un devis personnalisé par email sous 48h, sans engagement." />
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22><rect width=%2224%22 height=%2224%22 rx=%226%22 fill=%22%232f6fed%22/></svg>" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
@@ -48,132 +48,107 @@
   </div>
 </nav>
 
-<header class="page-hero">
+<header class="page-hero" style="min-height:50vh;">
   <div class="hero-glow"></div>
   <div class="container">
     <div class="hero-content">
-      <div class="eyebrow">Parlons de votre projet</div>
-      <h1>Une équipe prête à <span class="text-gradient">répondre</span>, sans détour.</h1>
-      <p class="lead">Que ce soit pour un audit gratuit, une question technique ou un projet ambitieux, notre équipe vous répond sous 24h ouvrées.</p>
-      <div class="breadcrumb"><a href="index.html">Accueil</a><span class="sep">/</span><span class="current">Contact</span></div>
+      <div class="eyebrow">Demande de devis</div>
+      <h1>Décrivez votre projet, <span class="text-gradient">recevez un devis</span> sous 48h.</h1>
+      <p class="lead">Remplissez le formulaire ci-dessous — notre équipe analyse votre demande et vous envoie une proposition claire, adaptée à votre budget, directement par email.</p>
+      <div class="breadcrumb"><a href="index.html">Accueil</a><span class="sep">/</span><span class="current">Demande de devis</span></div>
     </div>
   </div>
 </header>
 
 <section style="padding-top:0;">
   <div class="container">
-    <div class="grid grid-3">
-      <div class="info-card reveal" style="--i:0">
-        <div class="card-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0118 0z" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="1.7"/></svg></div>
-        <div>
-          <h4>Notre bureau</h4>
-          <p>1500 Innovation Ave, Suite 400<br>Boston, MA 02110</p>
-        </div>
-      </div>
-      <div class="info-card reveal" style="--i:1">
-        <div class="card-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3 19.5 19.5 0 01-6-6 19.8 19.8 0 01-3-8.7A2 2 0 014.1 2h3a2 2 0 012 1.7c.1 1 .3 2 .7 3a2 2 0 01-.5 2.1L8 10.1a16 16 0 006 6l1.3-1.3a2 2 0 012.1-.5c1 .4 2 .6 3 .7a2 2 0 011.6 2z" stroke="currentColor" stroke-width="1.7"/></svg></div>
-        <div>
-          <h4>Téléphone</h4>
-          <p>+1 (617) 555-0142<br>Lun–Ven, 8h–19h (EST)</p>
-        </div>
-      </div>
-      <div class="info-card reveal" style="--i:2">
-        <div class="card-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M4 4h16v16H4V4z" stroke="currentColor" stroke-width="1.7"/><path d="M4 6l8 7 8-7" stroke="currentColor" stroke-width="1.7"/></svg></div>
-        <div>
-          <h4>Email</h4>
-          <p>contact@amdcyberhightech.com<br>Réponse sous 24h ouvrées</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section style="padding-top:0;">
-  <div class="container">
-    <div class="grid grid-2" style="align-items:start;gap:48px;">
+    <div class="grid grid-2 quote-grid" style="align-items:start;gap:48px;">
       <div class="card reveal">
-        <h3 style="font-size:1.5rem;margin-bottom:8px;">Envoyez-nous un message</h3>
-        <p style="color:var(--text-dim);margin-bottom:28px;">Décrivez-nous votre besoin, nous revenons vers vous rapidement avec une proposition claire.</p>
-        <form id="contact-form">
+        <h3 style="font-size:1.4rem;margin-bottom:8px;">Votre projet en quelques détails</h3>
+        <p style="color:var(--text-dim);margin-bottom:28px;">Plus votre description est précise, plus notre devis sera pertinent.</p>
+        <form id="quote-form">
           <div class="form-grid">
             <div class="field">
-              <label for="fname">Prénom</label>
-              <input type="text" id="fname" name="fname" placeholder="Jean" required />
+              <label for="q-name">Nom complet</label>
+              <input type="text" id="q-name" name="name" placeholder="Jean Dupont" required />
             </div>
             <div class="field">
-              <label for="lname">Nom</label>
-              <input type="text" id="lname" name="lname" placeholder="Dupont" required />
+              <label for="q-company">Entreprise</label>
+              <input type="text" id="q-company" name="company" placeholder="Nom de votre entreprise" />
             </div>
             <div class="field">
-              <label for="email">Email professionnel</label>
-              <input type="email" id="email" name="email" placeholder="jean@entreprise.com" required />
+              <label for="q-email">Email</label>
+              <input type="email" id="q-email" name="email" placeholder="jean@entreprise.com" required />
             </div>
             <div class="field">
-              <label for="phone">Téléphone</label>
-              <input type="tel" id="phone" name="phone" placeholder="+1 (___) ___-____" />
+              <label for="q-phone">Téléphone</label>
+              <input type="tel" id="q-phone" name="phone" placeholder="+1 (___) ___-____" required />
             </div>
-            <div class="field full">
-              <label for="service">Service qui vous intéresse</label>
-              <select id="service" name="service">
+            <div class="field">
+              <label for="q-service">Service concerné</label>
+              <select id="q-service" name="service">
+                <option>Développement Web</option>
+                <option>Développement Mobile</option>
                 <option>Cybersécurité</option>
                 <option>Cloud &amp; Infrastructure</option>
-                <option>Développement sur mesure</option>
-                <option>Formation (CyberHigh Academy)</option>
-                <option>Managed IT Services</option>
-                <option>Autre / Non précisé</option>
+                <option>Design graphique</option>
+                <option>Maintenance informatique</option>
+                <option>Plusieurs services</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="q-budget">Budget estimé</label>
+              <select id="q-budget" name="budget">
+                <option>Moins de 2 000 $</option>
+                <option>2 000 $ – 5 000 $</option>
+                <option>5 000 $ – 15 000 $</option>
+                <option>15 000 $ – 50 000 $</option>
+                <option>Plus de 50 000 $</option>
+                <option>Je ne sais pas encore</option>
               </select>
             </div>
             <div class="field full">
-              <label for="message">Votre message</label>
-              <textarea id="message" name="message" placeholder="Parlez-nous de votre projet ou de votre besoin..." required></textarea>
+              <label for="q-desc">Description du projet</label>
+              <textarea id="q-desc" name="description" placeholder="Décrivez votre projet, vos objectifs, vos délais souhaités..." required></textarea>
             </div>
           </div>
-          <button type="submit" class="btn btn-primary btn-block" style="margin-top:26px;">Envoyer le message</button>
-          <p class="form-note">En soumettant ce formulaire, vous acceptez notre politique de confidentialité. Vos données ne sont jamais partagées.</p>
-          <div class="form-success" id="form-success">
+          <button type="submit" class="btn btn-primary btn-block" style="margin-top:26px;">Envoyer ma demande de devis</button>
+          <p class="form-note">Vous recevrez votre devis personnalisé par email sous 48h ouvrées, sans engagement.</p>
+          <div class="form-success" id="quote-success">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            Merci ! Votre message a été envoyé. Notre équipe vous répond sous 24h ouvrées.
+            Merci ! Votre demande a été envoyée. Vous recevrez votre devis par email sous 48h ouvrées.
           </div>
         </form>
       </div>
 
       <div class="reveal">
-        <div class="map-frame">
-          <div class="map-pin">
-            <div class="pin-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0118 0z" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="1.8"/></svg></div>
-            <div>1500 Innovation Ave, Suite 400<br>Boston, MA 02110</div>
+        <div class="card" style="margin-bottom:24px;">
+          <h4 style="margin-bottom:20px;">Comment ça marche</h4>
+          <div class="timeline" style="padding-left:34px;">
+            <div class="timeline-item" style="padding-bottom:28px;">
+              <div class="year" style="font-size:0.95rem;">Étape 1</div>
+              <h4 style="font-size:1rem;">Vous décrivez votre projet</h4>
+              <p style="font-size:0.88rem;">Remplissez le formulaire avec le plus de détails possible.</p>
+            </div>
+            <div class="timeline-item" style="padding-bottom:28px;">
+              <div class="year" style="font-size:0.95rem;">Étape 2</div>
+              <h4 style="font-size:1rem;">Notre équipe analyse votre demande</h4>
+              <p style="font-size:0.88rem;">Un expert du domaine concerné étudie votre besoin.</p>
+            </div>
+            <div class="timeline-item">
+              <div class="year" style="font-size:0.95rem;">Étape 3</div>
+              <h4 style="font-size:1rem;">Vous recevez votre devis par email</h4>
+              <p style="font-size:0.88rem;">Une proposition claire, détaillée et sans engagement, sous 48h.</p>
+            </div>
           </div>
         </div>
 
-        <div class="card" style="margin-top:24px;">
-          <h4 style="margin-bottom:16px;">Horaires d'ouverture</h4>
-          <div style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border);color:var(--text-dim);font-size:0.92rem;"><span>Lundi – Vendredi</span><span>8h00 – 19h00</span></div>
-          <div style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border);color:var(--text-dim);font-size:0.92rem;"><span>Samedi</span><span>9h00 – 14h00</span></div>
-          <div style="display:flex;justify-content:space-between;padding:10px 0;color:var(--text-dim);font-size:0.92rem;"><span>SOC Sécurité</span><span style="color:var(--cyan-300);font-weight:600;">24/7 — Toujours actif</span></div>
+        <div class="card">
+          <h4 style="margin-bottom:16px;">Besoin de nous parler directement ?</h4>
+          <div class="contact-line"><svg viewBox="0 0 24 24" fill="none"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3 19.5 19.5 0 01-6-6 19.8 19.8 0 01-3-8.7A2 2 0 014.1 2h3a2 2 0 012 1.7c.1 1 .3 2 .7 3a2 2 0 01-.5 2.1L8 10.1a16 16 0 006 6l1.3-1.3a2 2 0 012.1-.5c1 .4 2 .6 3 .7a2 2 0 011.6 2z" stroke="currentColor" stroke-width="1.6"/></svg><span>+1 (617) 555-0142</span></div>
+          <div class="contact-line"><svg viewBox="0 0 24 24" fill="none"><path d="M4 4h16v16H4V4z" stroke="currentColor" stroke-width="1.6"/><path d="M4 6l8 7 8-7" stroke="currentColor" stroke-width="1.6"/></svg><span>contact@amdcyberhightech.com</span></div>
+          <a href="https://wa.me/16175550142" target="_blank" rel="noopener" class="btn btn-ghost btn-block" style="margin-top:16px;">Discuter sur WhatsApp</a>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section>
-  <div class="container">
-    <div class="section-head reveal">
-      <div class="eyebrow">Questions fréquentes</div>
-      <h2>Avant de <span class="text-gradient">nous écrire</span></h2>
-    </div>
-    <div style="max-width:780px;margin:0 auto;">
-      <div class="accordion-item reveal">
-        <button class="accordion-trigger">Le premier audit est-il vraiment gratuit ?<span class="plus">+</span></button>
-        <div class="accordion-panel"><div class="inner">Oui, sans engagement. Nous analysons vos systèmes exposés et vous remettons un rapport clair des vulnérabilités identifiées, sans obligation d'achat.</div></div>
-      </div>
-      <div class="accordion-item reveal">
-        <button class="accordion-trigger">Sous combien de temps recevrai-je une réponse ?<span class="plus">+</span></button>
-        <div class="accordion-panel"><div class="inner">Nous répondons à toutes les demandes sous 24h ouvrées. Pour une urgence de sécurité, contactez directement notre ligne SOC 24/7.</div></div>
-      </div>
-      <div class="accordion-item reveal">
-        <button class="accordion-trigger">Intervenez-vous en dehors de Boston ?<span class="plus">+</span></button>
-        <div class="accordion-panel"><div class="inner">Oui, nous accompagnons des clients dans 6 pays grâce à nos équipes à distance et nos partenaires locaux certifiés.</div></div>
       </div>
     </div>
   </div>
@@ -210,20 +185,18 @@
       <div class="footer-col">
         <h4>Services</h4>
         <ul>
+          <li><a href="services.html">Développement Web</a></li>
+          <li><a href="services.html">Développement Mobile</a></li>
           <li><a href="services.html">Cybersécurité</a></li>
           <li><a href="services.html">Cloud &amp; Infrastructure</a></li>
-          <li><a href="services.html">Développement</a></li>
-          <li><a href="services.html">Formation</a></li>
-          <li><a href="services.html">Managed IT</a></li>
+          <li><a href="services.html">Design graphique</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Newsletter</h4>
-        <p style="color:var(--text-dim);font-size:0.92rem;margin-bottom:16px;">Recevez nos alertes de sécurité et nos conseils technologiques.</p>
-        <form class="newsletter-form">
-          <input type="email" placeholder="Votre email" required />
-          <button type="submit">S'abonner</button>
-        </form>
+        <h4>Contact</h4>
+        <div class="contact-line"><svg viewBox="0 0 24 24" fill="none"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0118 0z" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="1.6"/></svg><span>1500 Innovation Ave, Suite 400, Boston, MA</span></div>
+        <div class="contact-line"><svg viewBox="0 0 24 24" fill="none"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3 19.5 19.5 0 01-6-6 19.8 19.8 0 01-3-8.7A2 2 0 014.1 2h3a2 2 0 012 1.7c.1 1 .3 2 .7 3a2 2 0 01-.5 2.1L8 10.1a16 16 0 006 6l1.3-1.3a2 2 0 012.1-.5c1 .4 2 .6 3 .7a2 2 0 011.6 2z" stroke="currentColor" stroke-width="1.6"/></svg><span>+1 (617) 555-0142</span></div>
+        <div class="contact-line"><svg viewBox="0 0 24 24" fill="none"><path d="M4 4h16v16H4V4z" stroke="currentColor" stroke-width="1.6"/><path d="M4 6l8 7 8-7" stroke="currentColor" stroke-width="1.6"/></svg><span>contact@amdcyberhightech.com</span></div>
       </div>
     </div>
     <div class="footer-bottom">

@@ -1,4 +1,35 @@
 document.addEventListener("DOMContentLoaded", function () {
+  var root = document.documentElement;
+  var themeToggle = document.querySelector(".theme-toggle");
+  var storedTheme = null;
+  try { storedTheme = localStorage.getItem("amd-theme"); } catch (e) {}
+  if (storedTheme === "light" || storedTheme === "dark") {
+    root.setAttribute("data-theme", storedTheme);
+  }
+  if (themeToggle) {
+    themeToggle.addEventListener("click", function () {
+      var current = root.getAttribute("data-theme");
+      var next = current === "light" ? "dark" : "light";
+      root.setAttribute("data-theme", next);
+      try { localStorage.setItem("amd-theme", next); } catch (e) {}
+    });
+  }
+
+  document.querySelectorAll(".nav-item-dropdown").forEach(function (item) {
+    var trigger = item.querySelector(".dropdown-trigger");
+    if (!trigger) return;
+    trigger.addEventListener("click", function (e) {
+      if (window.innerWidth <= 960) {
+        e.preventDefault();
+        var isOpen = item.classList.contains("open");
+        document.querySelectorAll(".nav-item-dropdown.open").forEach(function (o) {
+          if (o !== item) o.classList.remove("open");
+        });
+        item.classList.toggle("open", !isOpen);
+      }
+    });
+  });
+
   var navbar = document.querySelector(".navbar");
   var navToggle = document.querySelector(".nav-toggle");
   var navLinks = document.querySelector(".nav-links");
@@ -149,6 +180,46 @@ document.addEventListener("DOMContentLoaded", function () {
           submitBtn.textContent = originalText;
           submitBtn.disabled = false;
           contactForm.reset();
+          if (successBox) successBox.classList.add("show");
+        }, 900);
+      }
+    });
+  }
+
+  var careerForm = document.getElementById("career-form");
+  if (careerForm) {
+    careerForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var successBox = document.getElementById("career-success");
+      var submitBtn = careerForm.querySelector("button[type='submit']");
+      if (submitBtn) {
+        var originalText = submitBtn.textContent;
+        submitBtn.textContent = "Envoi en cours...";
+        submitBtn.disabled = true;
+        setTimeout(function () {
+          submitBtn.textContent = originalText;
+          submitBtn.disabled = false;
+          careerForm.reset();
+          if (successBox) successBox.classList.add("show");
+        }, 900);
+      }
+    });
+  }
+
+  var quoteForm = document.getElementById("quote-form");
+  if (quoteForm) {
+    quoteForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var successBox = document.getElementById("quote-success");
+      var submitBtn = quoteForm.querySelector("button[type='submit']");
+      if (submitBtn) {
+        var originalText = submitBtn.textContent;
+        submitBtn.textContent = "Envoi en cours...";
+        submitBtn.disabled = true;
+        setTimeout(function () {
+          submitBtn.textContent = originalText;
+          submitBtn.disabled = false;
+          quoteForm.reset();
           if (successBox) successBox.classList.add("show");
         }, 900);
       }
