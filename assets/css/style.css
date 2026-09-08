@@ -1293,6 +1293,22 @@ footer {
 
 .form-success.show { display: flex; }
 
+.form-error {
+  display: none;
+  align-items: center;
+  gap: 12px;
+  background: rgba(239, 68, 68, 0.08);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #f87171;
+  padding: 16px 20px;
+  border-radius: var(--radius-sm);
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+.form-error svg { flex-shrink: 0; }
+.form-error.show { display: flex; }
+
 /* ---------- Info cards (contact) ---------- */
 
 .info-card {

@@ -112,11 +112,17 @@
               <textarea id="q-desc" name="description" placeholder="Décrivez votre projet, vos objectifs, vos délais souhaités..." required></textarea>
             </div>
           </div>
-          <button type="submit" class="btn btn-primary btn-block" style="margin-top:26px;">Envoyer ma demande de devis</button>
-          <p class="form-note">Vous recevrez votre devis personnalisé par email sous 48h ouvrées, sans engagement.</p>
+          <button type="button" id="quote-pay-btn" class="btn btn-primary btn-block" style="margin-top:26px;">
+            Payer 1 305 FCFA <span style="opacity:.85;font-weight:500;">(≈ 1,99 € / 2,14 $)</span> et envoyer
+          </button>
+          <p class="form-note">Des frais de traitement de 1 305 FCFA (≈ 1,99 € / 2,14 $) s'appliquent à l'envoi de chaque demande de devis, via Mobile Money ou carte bancaire. Vous recevrez votre devis personnalisé par email sous 48h ouvrées.</p>
+          <div class="form-error" id="quote-payment-error">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 9v4M12 17h.01" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/></svg>
+            Le paiement a échoué ou a été annulé. Veuillez réessayer.
+          </div>
           <div class="form-success" id="quote-success">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            Merci ! Votre demande a été envoyée. Vous recevrez votre devis par email sous 48h ouvrées.
+            <span>Paiement confirmé ! Votre demande a été envoyée. Vous recevrez votre devis par email sous 48h ouvrées.<br><span class="tx-ref" style="opacity:.75;font-size:12px;"></span></span>
           </div>
         </form>
       </div>
@@ -214,5 +220,68 @@
 <a href="#" class="back-to-top" aria-label="Retour en haut"><svg viewBox="0 0 24 24" fill="none"><path d="M12 19V5M5 12l7-7 7 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
 
 <script src="assets/js/main.js"></script>
+
+<!--
+  Paiement Kkiapay avant envoi de la demande de devis.
+  1. Créez un compte sur https://kkiapay.me puis récupérez votre clé publique
+     (tableau de bord > Clés API) et remplacez KKIAPAY_PUBLIC_KEY ci-dessous.
+  2. Laissez KKIAPAY_SANDBOX à true pour tester, passez à false en production.
+  3. Cette intégration suit l'API documentée par Kkiapay (openKkiapayWidget /
+     addSuccessListener / addFailedListener) au moment de l'écriture — accès
+     direct à docs.kkiapay.me bloqué depuis cet environnement de développement,
+     donc vérifiez les noms de paramètres sur https://docs.kkiapay.me avant
+     la mise en ligne définitive.
+-->
+<script src="https://cdn.kkiapay.me/k.js"></script>
+<script>
+  var KKIAPAY_PUBLIC_KEY = "VOTRE_CLE_PUBLIQUE_KKIAPAY";
+  var KKIAPAY_SANDBOX = true;
+
+  document.addEventListener("DOMContentLoaded", function () {
+    var quoteForm = document.getElementById("quote-form");
+    var payBtn = document.getElementById("quote-pay-btn");
+    var successBox = document.getElementById("quote-success");
+    var errorBox = document.getElementById("quote-payment-error");
+    if (!quoteForm || !payBtn) return;
+
+    payBtn.addEventListener("click", function () {
+      errorBox.classList.remove("show");
+      successBox.classList.remove("show");
+      if (!quoteForm.reportValidity()) return;
+
+      if (typeof openKkiapayWidget !== "function") {
+        errorBox.classList.add("show");
+        return;
+      }
+
+      openKkiapayWidget({
+        amount: 1305,
+        key: KKIAPAY_PUBLIC_KEY,
+        sandbox: KKIAPAY_SANDBOX,
+        data: "Demande de devis - AMD CyberHigh Tech",
+        theme: "#2f6fed",
+        position: "center"
+      });
+    });
+
+    if (typeof addSuccessListener === "function") {
+      addSuccessListener(function (response) {
+        successBox.classList.add("show");
+        errorBox.classList.remove("show");
+        var ref = successBox.querySelector(".tx-ref");
+        if (ref && response && response.transactionId) {
+          ref.textContent = "Référence de paiement : " + response.transactionId;
+        }
+        quoteForm.reset();
+      });
+    }
+
+    if (typeof addFailedListener === "function") {
+      addFailedListener(function () {
+        errorBox.classList.add("show");
+      });
+    }
+  });
+</script>
 </body>
 </html>

@@ -221,25 +221,8 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  var quoteForm = document.getElementById("quote-form");
-  if (quoteForm) {
-    quoteForm.addEventListener("submit", function (e) {
-      e.preventDefault();
-      var successBox = document.getElementById("quote-success");
-      var submitBtn = quoteForm.querySelector("button[type='submit']");
-      if (submitBtn) {
-        var originalText = submitBtn.textContent;
-        submitBtn.textContent = "Envoi en cours...";
-        submitBtn.disabled = true;
-        setTimeout(function () {
-          submitBtn.textContent = originalText;
-          submitBtn.disabled = false;
-          quoteForm.reset();
-          if (successBox) successBox.classList.add("show");
-        }, 900);
-      }
-    });
-  }
+  // Le formulaire de devis est géré par le script de paiement Kkiapay
+  // en bas de quote.html (le paiement doit réussir avant l'envoi).
 
   var newsletterForms = document.querySelectorAll(".newsletter-form");
   newsletterForms.forEach(function (form) {
