@@ -223,18 +223,21 @@
 
 <!--
   Paiement Kkiapay avant envoi de la demande de devis.
-  1. Créez un compte sur https://kkiapay.me puis récupérez votre clé publique
-     (tableau de bord > Clés API) et remplacez KKIAPAY_PUBLIC_KEY ci-dessous.
-  2. Laissez KKIAPAY_SANDBOX à true pour tester, passez à false en production.
-  3. Cette intégration suit l'API documentée par Kkiapay (openKkiapayWidget /
-     addSuccessListener / addFailedListener) au moment de l'écriture — accès
-     direct à docs.kkiapay.me bloqué depuis cet environnement de développement,
-     donc vérifiez les noms de paramètres sur https://docs.kkiapay.me avant
-     la mise en ligne définitive.
+  Clé publique sandbox configurée — la clé privée Kkiapay ne doit JAMAIS
+  apparaître ici ni dans aucun fichier du site : elle sert uniquement aux
+  appels serveur à serveur (vérification de transaction), pas au widget
+  côté navigateur. Gardez-la uniquement dans le tableau de bord Kkiapay.
+  Une fois les tests en sandbox validés, remplacez la clé ci-dessous par
+  votre clé publique de PRODUCTION et passez KKIAPAY_SANDBOX à false.
+  Cette intégration suit l'API documentée par Kkiapay (openKkiapayWidget /
+  addSuccessListener / addFailedListener) au moment de l'écriture — accès
+  direct à docs.kkiapay.me bloqué depuis cet environnement de développement,
+  donc vérifiez les noms de paramètres sur https://docs.kkiapay.me si le
+  widget ne s'ouvre pas comme attendu.
 -->
 <script src="https://cdn.kkiapay.me/k.js"></script>
 <script>
-  var KKIAPAY_PUBLIC_KEY = "VOTRE_CLE_PUBLIQUE_KKIAPAY";
+  var KKIAPAY_PUBLIC_KEY = "53ca95d0a5e711f186326d7e08920f27";
   var KKIAPAY_SANDBOX = true;
 
   document.addEventListener("DOMContentLoaded", function () {
