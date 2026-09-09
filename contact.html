@@ -257,9 +257,37 @@
   3. Consultez les messages reçus dans Table Editor > contact_messages.
 -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<!--
+  Notification par email via EmailJS (envoi direct depuis le navigateur,
+  sans serveur), en plus de l'enregistrement dans Supabase ci-dessus.
+  1. Créez un compte gratuit sur https://www.emailjs.com
+  2. Email Services > Add New Service > Gmail > connectez votre Gmail.
+  3. Email Templates > Create New Template, avec dans le corps les
+     variables {{subject}}, {{from_name}}, {{from_email}}, {{phone}},
+     {{message}}. Réglez "To Email" sur votre propre adresse Gmail et
+     "Reply To" sur {{from_email}} pour pouvoir répondre directement.
+  4. Récupérez le Service ID (Email Services), le Template ID (Email
+     Templates) et la Public Key (Account > General > API Keys), et
+     remplacez les 3 valeurs ci-dessous. Les mêmes identifiants sont
+     réutilisés sur quote.html et careers.html (un seul template suffit).
+-->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
   var SUPABASE_URL = "https://uhhvcxmemgmfadjiokwy.supabase.co";
   var SUPABASE_ANON_KEY = "sb_publishable_iceUY7Gp1oGy5IY6qGF48g_j-zY0md_";
+  var EMAILJS_PUBLIC_KEY = "VOTRE_CLE_PUBLIQUE_EMAILJS";
+  var EMAILJS_SERVICE_ID = "VOTRE_SERVICE_ID_EMAILJS";
+  var EMAILJS_TEMPLATE_ID = "VOTRE_TEMPLATE_ID_EMAILJS";
+
+  if (typeof emailjs !== "undefined") emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+
+  function sendEmailNotification(params) {
+    if (typeof emailjs === "undefined") return;
+    emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, params).catch(function (err) {
+      console.error("EmailJS error:", err);
+    });
+  }
 
   document.addEventListener("DOMContentLoaded", function () {
     var form = document.getElementById("contact-form");
@@ -292,6 +320,13 @@
         if (res.error) {
           errorBox.classList.add("show");
         } else {
+          sendEmailNotification({
+            subject: "Nouveau message de contact — AMD CyberHigh Tech",
+            from_name: form.fname.value + " " + form.lname.value,
+            from_email: form.email.value,
+            phone: form.phone.value,
+            message: "Service concerné : " + form.service.value + "\n\n" + form.message.value
+          });
           successBox.classList.add("show");
           form.reset();
         }

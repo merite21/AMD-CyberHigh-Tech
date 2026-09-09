@@ -311,9 +311,27 @@
      et les CV dans Storage > job-applications-cv.
 -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<!--
+  Notification par email via EmailJS — mêmes identifiants que sur
+  contact.html (un seul compte / template EmailJS pour tout le site).
+-->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
   var SUPABASE_URL = "https://uhhvcxmemgmfadjiokwy.supabase.co";
   var SUPABASE_ANON_KEY = "sb_publishable_iceUY7Gp1oGy5IY6qGF48g_j-zY0md_";
+  var EMAILJS_PUBLIC_KEY = "VOTRE_CLE_PUBLIQUE_EMAILJS";
+  var EMAILJS_SERVICE_ID = "VOTRE_SERVICE_ID_EMAILJS";
+  var EMAILJS_TEMPLATE_ID = "VOTRE_TEMPLATE_ID_EMAILJS";
+
+  if (typeof emailjs !== "undefined") emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+
+  function sendEmailNotification(params) {
+    if (typeof emailjs === "undefined") return;
+    emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, params).catch(function (err) {
+      console.error("EmailJS error:", err);
+    });
+  }
 
   document.addEventListener("DOMContentLoaded", function () {
     var form = document.getElementById("career-form");
@@ -348,6 +366,15 @@
           if (res.error) {
             errorBox.classList.add("show");
           } else {
+            sendEmailNotification({
+              subject: "Nouvelle candidature — AMD CyberHigh Tech",
+              from_name: form.fname.value + " " + form.lname.value,
+              from_email: form.email.value,
+              phone: form.phone.value,
+              message: "Poste souhaité : " + form.position.value +
+                "\nCV joint : " + (cvPath ? "oui (voir Supabase Storage > job-applications-cv)" : "non") +
+                "\n\n" + form.message.value
+            });
             successBox.classList.add("show");
             form.reset();
           }

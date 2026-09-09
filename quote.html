@@ -244,11 +244,29 @@
   script SQL fourni pour créer la table "quote_requests".
 -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<!--
+  Notification par email via EmailJS — mêmes identifiants que sur
+  contact.html (un seul compte / template EmailJS pour tout le site).
+-->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
   var KKIAPAY_PUBLIC_KEY = "53ca95d0a5e711f186326d7e08920f27";
   var KKIAPAY_SANDBOX = true;
   var SUPABASE_URL = "https://uhhvcxmemgmfadjiokwy.supabase.co";
   var SUPABASE_ANON_KEY = "sb_publishable_iceUY7Gp1oGy5IY6qGF48g_j-zY0md_";
+  var EMAILJS_PUBLIC_KEY = "VOTRE_CLE_PUBLIQUE_EMAILJS";
+  var EMAILJS_SERVICE_ID = "VOTRE_SERVICE_ID_EMAILJS";
+  var EMAILJS_TEMPLATE_ID = "VOTRE_TEMPLATE_ID_EMAILJS";
+
+  if (typeof emailjs !== "undefined") emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+
+  function sendEmailNotification(params) {
+    if (typeof emailjs === "undefined") return;
+    emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, params).catch(function (err) {
+      console.error("EmailJS error:", err);
+    });
+  }
 
   document.addEventListener("DOMContentLoaded", function () {
     var quoteForm = document.getElementById("quote-form");
@@ -299,6 +317,18 @@
             if (res.error) console.error("Supabase insert error:", res.error);
           });
         }
+
+        sendEmailNotification({
+          subject: "Nouvelle demande de devis (payée) — AMD CyberHigh Tech",
+          from_name: quoteForm.name.value,
+          from_email: quoteForm.email.value,
+          phone: quoteForm.phone.value,
+          message: "Entreprise : " + quoteForm.company.value +
+            "\nService : " + quoteForm.service.value +
+            "\nBudget : " + quoteForm.budget.value +
+            "\nRéférence de paiement : " + txId +
+            "\n\n" + quoteForm.description.value
+        });
 
         successBox.classList.add("show");
         errorBox.classList.remove("show");
