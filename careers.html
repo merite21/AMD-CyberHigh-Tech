@@ -224,6 +224,10 @@
         </div>
         <button type="submit" class="btn btn-primary btn-block" style="margin-top:26px;">Envoyer ma candidature</button>
         <p class="form-note">Vos données sont traitées de manière confidentielle et utilisées uniquement dans le cadre du recrutement.</p>
+        <div class="form-error" id="career-error">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 9v4M12 17h.01" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/></svg>
+          Une erreur est survenue. Réessayez, ou contactez-nous directement par WhatsApp.
+        </div>
         <div class="form-success" id="career-success">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
           Merci ! Votre candidature a bien été reçue. Notre équipe RH vous contactera si votre profil correspond.
@@ -293,5 +297,80 @@
 <a href="#" class="back-to-top" aria-label="Retour en haut"><svg viewBox="0 0 24 24" fill="none"><path d="M12 19V5M5 12l7-7 7 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
 
 <script src="assets/js/main.js"></script>
+
+<!--
+  Envoi de la candidature vers Supabase (table + stockage du CV).
+  1. Créez un projet sur https://supabase.com (gratuit), puis dans
+     Project Settings > API, récupérez l'URL du projet et la clé
+     "anon public", et remplacez les deux valeurs ci-dessous
+     (les mêmes que sur contact.html et quote.html).
+  2. Dans l'éditeur SQL de Supabase, exécutez le script fourni pour
+     créer la table "job_applications", le bucket de stockage
+     "job-applications-cv" et leurs politiques d'accès.
+  3. Consultez les candidatures dans Table Editor > job_applications,
+     et les CV dans Storage > job-applications-cv.
+-->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  var SUPABASE_URL = "VOTRE_URL_SUPABASE";
+  var SUPABASE_ANON_KEY = "VOTRE_CLE_ANON_SUPABASE";
+
+  document.addEventListener("DOMContentLoaded", function () {
+    var form = document.getElementById("career-form");
+    var successBox = document.getElementById("career-success");
+    var errorBox = document.getElementById("career-error");
+    if (!form || typeof supabase === "undefined") return;
+
+    var db = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      errorBox.classList.remove("show");
+      successBox.classList.remove("show");
+
+      var submitBtn = form.querySelector("button[type='submit']");
+      var originalText = submitBtn.textContent;
+      submitBtn.textContent = "Envoi en cours...";
+      submitBtn.disabled = true;
+
+      function insertApplication(cvPath) {
+        db.from("job_applications").insert([{
+          first_name: form.fname.value,
+          last_name: form.lname.value,
+          email: form.email.value,
+          phone: form.phone.value,
+          position: form.position.value,
+          message: form.message.value,
+          cv_path: cvPath
+        }]).then(function (res) {
+          submitBtn.textContent = originalText;
+          submitBtn.disabled = false;
+          if (res.error) {
+            errorBox.classList.add("show");
+          } else {
+            successBox.classList.add("show");
+            form.reset();
+          }
+        });
+      }
+
+      var cvFile = form.cv.files && form.cv.files[0];
+      if (cvFile) {
+        var cvPath = Date.now() + "-" + cvFile.name.replace(/[^a-zA-Z0-9.\-_]/g, "_");
+        db.storage.from("job-applications-cv").upload(cvPath, cvFile).then(function (res) {
+          if (res.error) {
+            submitBtn.textContent = originalText;
+            submitBtn.disabled = false;
+            errorBox.classList.add("show");
+            return;
+          }
+          insertApplication(cvPath);
+        });
+      } else {
+        insertApplication(null);
+      }
+    });
+  });
+</script>
 </body>
 </html>

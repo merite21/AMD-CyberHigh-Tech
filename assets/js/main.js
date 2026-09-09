@@ -181,48 +181,9 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  var contactForm = document.getElementById("contact-form");
-  if (contactForm) {
-    contactForm.addEventListener("submit", function (e) {
-      e.preventDefault();
-      var successBox = document.getElementById("form-success");
-      var submitBtn = contactForm.querySelector("button[type='submit']");
-      if (submitBtn) {
-        var originalText = submitBtn.textContent;
-        submitBtn.textContent = "Envoi en cours...";
-        submitBtn.disabled = true;
-        setTimeout(function () {
-          submitBtn.textContent = originalText;
-          submitBtn.disabled = false;
-          contactForm.reset();
-          if (successBox) successBox.classList.add("show");
-        }, 900);
-      }
-    });
-  }
-
-  var careerForm = document.getElementById("career-form");
-  if (careerForm) {
-    careerForm.addEventListener("submit", function (e) {
-      e.preventDefault();
-      var successBox = document.getElementById("career-success");
-      var submitBtn = careerForm.querySelector("button[type='submit']");
-      if (submitBtn) {
-        var originalText = submitBtn.textContent;
-        submitBtn.textContent = "Envoi en cours...";
-        submitBtn.disabled = true;
-        setTimeout(function () {
-          submitBtn.textContent = originalText;
-          submitBtn.disabled = false;
-          careerForm.reset();
-          if (successBox) successBox.classList.add("show");
-        }, 900);
-      }
-    });
-  }
-
-  // Le formulaire de devis est géré par le script de paiement Kkiapay
-  // en bas de quote.html (le paiement doit réussir avant l'envoi).
+  // Les formulaires contact, devis et candidature sont gérés par des
+  // scripts dédiés en bas de chaque page (envoi réel vers Supabase,
+  // paiement Kkiapay pour le devis).
 
   var newsletterForms = document.querySelectorAll(".newsletter-form");
   newsletterForms.forEach(function (form) {

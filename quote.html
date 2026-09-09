@@ -236,9 +236,19 @@
   widget ne s'ouvre pas comme attendu.
 -->
 <script src="https://cdn.kkiapay.me/k.js"></script>
+
+<!--
+  Enregistrement de la demande de devis dans Supabase (après paiement).
+  Même projet Supabase que pour le formulaire de contact — utilisez la
+  même URL et la même clé "anon public" ci-dessous, et exécutez le
+  script SQL fourni pour créer la table "quote_requests".
+-->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
   var KKIAPAY_PUBLIC_KEY = "53ca95d0a5e711f186326d7e08920f27";
   var KKIAPAY_SANDBOX = true;
+  var SUPABASE_URL = "VOTRE_URL_SUPABASE";
+  var SUPABASE_ANON_KEY = "VOTRE_CLE_ANON_SUPABASE";
 
   document.addEventListener("DOMContentLoaded", function () {
     var quoteForm = document.getElementById("quote-form");
@@ -246,6 +256,10 @@
     var successBox = document.getElementById("quote-success");
     var errorBox = document.getElementById("quote-payment-error");
     if (!quoteForm || !payBtn) return;
+
+    var db = (typeof supabase !== "undefined")
+      ? supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+      : null;
 
     payBtn.addEventListener("click", function () {
       errorBox.classList.remove("show");
@@ -269,11 +283,28 @@
 
     if (typeof addSuccessListener === "function") {
       addSuccessListener(function (response) {
+        var txId = response && response.transactionId ? response.transactionId : "";
+
+        if (db) {
+          db.from("quote_requests").insert([{
+            full_name: quoteForm.name.value,
+            company: quoteForm.company.value,
+            email: quoteForm.email.value,
+            phone: quoteForm.phone.value,
+            service: quoteForm.service.value,
+            budget: quoteForm.budget.value,
+            description: quoteForm.description.value,
+            payment_transaction_id: txId
+          }]).then(function (res) {
+            if (res.error) console.error("Supabase insert error:", res.error);
+          });
+        }
+
         successBox.classList.add("show");
         errorBox.classList.remove("show");
         var ref = successBox.querySelector(".tx-ref");
-        if (ref && response && response.transactionId) {
-          ref.textContent = "Référence de paiement : " + response.transactionId;
+        if (ref && txId) {
+          ref.textContent = "Référence de paiement : " + txId;
         }
         quoteForm.reset();
       });

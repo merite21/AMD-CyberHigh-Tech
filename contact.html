@@ -131,6 +131,10 @@
           </div>
           <button type="submit" class="btn btn-primary btn-block" style="margin-top:26px;">Envoyer le message</button>
           <p class="form-note">En soumettant ce formulaire, vous acceptez notre politique de confidentialité. Vos données ne sont jamais partagées.</p>
+          <div class="form-error" id="form-error">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 9v4M12 17h.01" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/></svg>
+            Une erreur est survenue. Réessayez, ou contactez-nous directement par WhatsApp.
+          </div>
           <div class="form-success" id="form-success">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
             Merci ! Votre message a été envoyé. Notre équipe vous répond sous 24h ouvrées.
@@ -211,11 +215,11 @@
       <div class="footer-col">
         <h4>Services</h4>
         <ul>
+          <li><a href="services.html">Développement Web</a></li>
+          <li><a href="services.html">Développement Mobile</a></li>
           <li><a href="services.html">Cybersécurité</a></li>
           <li><a href="services.html">Cloud &amp; Infrastructure</a></li>
-          <li><a href="services.html">Développement</a></li>
-          <li><a href="services.html">Formation</a></li>
-          <li><a href="services.html">Managed IT</a></li>
+          <li><a href="services.html">Design graphique</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -242,5 +246,58 @@
 <a href="#" class="back-to-top" aria-label="Retour en haut"><svg viewBox="0 0 24 24" fill="none"><path d="M12 19V5M5 12l7-7 7 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
 
 <script src="assets/js/main.js"></script>
+
+<!--
+  Envoi du formulaire de contact vers Supabase.
+  1. Créez un projet sur https://supabase.com (gratuit), puis dans
+     Project Settings > API, récupérez l'URL du projet et la clé
+     "anon public", et remplacez les deux valeurs ci-dessous.
+  2. Dans l'éditeur SQL de Supabase, exécutez le script fourni pour
+     créer la table "contact_messages" et sa politique d'accès.
+  3. Consultez les messages reçus dans Table Editor > contact_messages.
+-->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  var SUPABASE_URL = "VOTRE_URL_SUPABASE";
+  var SUPABASE_ANON_KEY = "VOTRE_CLE_ANON_SUPABASE";
+
+  document.addEventListener("DOMContentLoaded", function () {
+    var form = document.getElementById("contact-form");
+    var successBox = document.getElementById("form-success");
+    var errorBox = document.getElementById("form-error");
+    if (!form || typeof supabase === "undefined") return;
+
+    var db = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      errorBox.classList.remove("show");
+      successBox.classList.remove("show");
+
+      var submitBtn = form.querySelector("button[type='submit']");
+      var originalText = submitBtn.textContent;
+      submitBtn.textContent = "Envoi en cours...";
+      submitBtn.disabled = true;
+
+      db.from("contact_messages").insert([{
+        first_name: form.fname.value,
+        last_name: form.lname.value,
+        email: form.email.value,
+        phone: form.phone.value,
+        service: form.service.value,
+        message: form.message.value
+      }]).then(function (res) {
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+        if (res.error) {
+          errorBox.classList.add("show");
+        } else {
+          successBox.classList.add("show");
+          form.reset();
+        }
+      });
+    });
+  });
+</script>
 </body>
 </html>
