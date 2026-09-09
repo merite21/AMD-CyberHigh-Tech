@@ -727,6 +727,126 @@ section {
 
 .collage-tile.stat::before { display: none; }
 
+.collage-tile.mockup { padding: 14px; }
+.collage-tile.mockup::before { opacity: 0.5; }
+
+/* ---------- Device mockups (browser / phone) ---------- */
+
+.mockup-browser {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 300px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+}
+
+.mockup-browser .m-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 10px;
+  background: var(--surface-3);
+  border-bottom: 1px solid var(--border);
+}
+
+.mockup-browser .m-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+.mockup-browser .m-dot.r { background: #ff5f57; }
+.mockup-browser .m-dot.y { background: #febc2e; }
+.mockup-browser .m-dot.g { background: #28c840; }
+
+.mockup-browser .m-url {
+  flex: 1;
+  height: 12px;
+  margin-left: 6px;
+  background: var(--surface);
+  border-radius: 4px;
+}
+
+.mockup-browser .m-body { padding: 12px; }
+
+.mockup-browser .m-head {
+  height: 8px;
+  width: 45%;
+  border-radius: 4px;
+  background: var(--gradient-brand);
+  opacity: 0.85;
+  margin-bottom: 10px;
+}
+
+.mockup-browser .m-stats { display: flex; gap: 8px; margin-bottom: 10px; }
+
+.mockup-browser .m-stat {
+  flex: 1;
+  border-radius: 8px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  padding: 8px;
+}
+
+.mockup-browser .m-num { height: 6px; width: 60%; border-radius: 3px; background: var(--text-dim); opacity: 0.55; margin-bottom: 5px; }
+.mockup-browser .m-lbl { height: 5px; width: 80%; border-radius: 3px; background: var(--text-mute); opacity: 0.4; }
+
+.mockup-browser .m-chart { display: flex; align-items: flex-end; gap: 5px; height: 38px; }
+.mockup-browser .m-chart span { flex: 1; border-radius: 3px 3px 0 0; background: var(--gradient-brand); opacity: 0.85; }
+
+.mockup-phone {
+  width: 92px;
+  aspect-ratio: 9 / 19;
+  border-radius: 18px;
+  border: 4px solid var(--surface-3);
+  background: var(--surface);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+  flex-shrink: 0;
+  z-index: 2;
+}
+
+.mockup-phone::before {
+  content: "";
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 36%;
+  height: 8px;
+  background: var(--surface-3);
+  border-radius: 6px;
+  z-index: 2;
+}
+
+.mockup-phone .p-body {
+  padding: 20px 8px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  height: 100%;
+}
+
+.mockup-phone .p-line { height: 6px; border-radius: 3px; background: var(--surface-2); }
+.mockup-phone .p-line.w60 { width: 60%; }
+.mockup-phone .p-line.w80 { width: 80%; }
+.mockup-phone .p-card { flex: 1; border-radius: 8px; background: var(--surface-2); border: 1px solid var(--border); margin-top: 4px; }
+
+.mockup-combo {
+  position: relative;
+  z-index: 1;
+  width: 78%;
+}
+
+.mockup-combo .mockup-phone {
+  position: absolute;
+  bottom: -18px;
+  right: -22px;
+}
+
+.case-visual .mockup-browser { width: 82%; }
+.case-visual { padding: 14px; }
+
 .collage-tile.stat .num {
   font-family: "Space Grotesk", sans-serif;
   font-size: 2.1rem;
