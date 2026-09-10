@@ -314,7 +314,8 @@
 
 <!--
   Notification par email via EmailJS — mêmes identifiants que sur
-  contact.html (un seul compte / template EmailJS pour tout le site).
+  contact.html (un seul compte / template EmailJS "Contact Us" pour
+  tout le site, variables {{name}}, {{email}}, {{title}}, {{message}}).
 -->
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
@@ -367,11 +368,11 @@
             errorBox.classList.add("show");
           } else {
             sendEmailNotification({
-              subject: "Nouvelle candidature — AMD CyberHigh Tech",
-              from_name: form.fname.value + " " + form.lname.value,
-              from_email: form.email.value,
-              phone: form.phone.value,
-              message: "Poste souhaité : " + form.position.value +
+              title: "Nouvelle candidature",
+              name: form.fname.value + " " + form.lname.value,
+              email: form.email.value,
+              message: "Téléphone : " + form.phone.value +
+                "\nPoste souhaité : " + form.position.value +
                 "\nCV joint : " + (cvPath ? "oui (voir Supabase Storage > job-applications-cv)" : "non") +
                 "\n\n" + form.message.value
             });

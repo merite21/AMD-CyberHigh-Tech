@@ -261,16 +261,11 @@
 <!--
   Notification par email via EmailJS (envoi direct depuis le navigateur,
   sans serveur), en plus de l'enregistrement dans Supabase ci-dessus.
-  1. Créez un compte gratuit sur https://www.emailjs.com
-  2. Email Services > Add New Service > Gmail > connectez votre Gmail.
-  3. Email Templates > Create New Template, avec dans le corps les
-     variables {{subject}}, {{from_name}}, {{from_email}}, {{phone}},
-     {{message}}. Réglez "To Email" sur votre propre adresse Gmail et
-     "Reply To" sur {{from_email}} pour pouvoir répondre directement.
-  4. Récupérez le Service ID (Email Services), le Template ID (Email
-     Templates) et la Public Key (Account > General > API Keys), et
-     remplacez les 3 valeurs ci-dessous. Les mêmes identifiants sont
-     réutilisés sur quote.html et careers.html (un seul template suffit).
+  Utilise le template EmailJS "Contact Us" avec ses variables d'origine
+  ({{name}}, {{email}}, {{title}}, {{message}}). Récupérez le Service ID
+  (Email Services), le Template ID (Email Templates) et la Public Key
+  (Account > General > API Keys), et remplacez les 3 valeurs ci-dessous.
+  Les mêmes identifiants sont réutilisés sur quote.html et careers.html.
 -->
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
@@ -321,11 +316,12 @@
           errorBox.classList.add("show");
         } else {
           sendEmailNotification({
-            subject: "Nouveau message de contact — AMD CyberHigh Tech",
-            from_name: form.fname.value + " " + form.lname.value,
-            from_email: form.email.value,
-            phone: form.phone.value,
-            message: "Service concerné : " + form.service.value + "\n\n" + form.message.value
+            title: "Nouveau message de contact",
+            name: form.fname.value + " " + form.lname.value,
+            email: form.email.value,
+            message: "Téléphone : " + form.phone.value +
+              "\nService concerné : " + form.service.value +
+              "\n\n" + form.message.value
           });
           successBox.classList.add("show");
           form.reset();

@@ -247,7 +247,8 @@
 
 <!--
   Notification par email via EmailJS — mêmes identifiants que sur
-  contact.html (un seul compte / template EmailJS pour tout le site).
+  contact.html (un seul compte / template EmailJS "Contact Us" pour
+  tout le site, variables {{name}}, {{email}}, {{title}}, {{message}}).
 -->
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
@@ -319,11 +320,11 @@
         }
 
         sendEmailNotification({
-          subject: "Nouvelle demande de devis (payée) — AMD CyberHigh Tech",
-          from_name: quoteForm.name.value,
-          from_email: quoteForm.email.value,
-          phone: quoteForm.phone.value,
-          message: "Entreprise : " + quoteForm.company.value +
+          title: "Nouvelle demande de devis (payée)",
+          name: quoteForm.name.value,
+          email: quoteForm.email.value,
+          message: "Téléphone : " + quoteForm.phone.value +
+            "\nEntreprise : " + quoteForm.company.value +
             "\nService : " + quoteForm.service.value +
             "\nBudget : " + quoteForm.budget.value +
             "\nRéférence de paiement : " + txId +
