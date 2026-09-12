@@ -90,6 +90,18 @@
 
 <section style="padding-top:0;">
   <div class="container">
+    <div class="cta-banner reveal" style="text-align:center;">
+      <h2>Vous préférez en parler de vive voix ?</h2>
+      <p>Réservez directement un créneau de 30 minutes dans mon agenda, sans email ni appel à programmer.</p>
+      <div class="cta-actions">
+        <button type="button" class="btn btn-primary" onclick="Calendly.initPopupWidget({url: CALENDLY_URL}); return false;">Prendre rendez-vous</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0;">
+  <div class="container">
     <div class="grid grid-2" style="align-items:start;gap:48px;">
       <div class="card reveal">
         <h3 style="font-size:1.5rem;margin-bottom:8px;">Envoyez-nous un message</h3>
@@ -247,6 +259,20 @@
 <a href="#" class="back-to-top" aria-label="Retour en haut"><svg viewBox="0 0 24 24" fill="none"><path d="M12 19V5M5 12l7-7 7 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
 
 <script src="assets/js/main.js"></script>
+
+<!--
+  Prise de rendez-vous en ligne via Calendly (gratuit, aucun serveur).
+  1. Créez un compte sur https://calendly.com et configurez vos
+     disponibilités (ex: créneaux de 30 min).
+  2. Copiez le lien de votre page d'événement (ex:
+     https://calendly.com/votre-nom/30min) et remplacez CALENDLY_URL
+     ci-dessous.
+-->
+<link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+<script src="https://assets.calendly.com/assets/external/widget.js"></script>
+<script>
+  var CALENDLY_URL = "https://calendly.com/VOTRE-LIEN/30min";
+</script>
 
 <!--
   Envoi du formulaire de contact vers Supabase.
