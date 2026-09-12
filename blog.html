@@ -127,10 +127,11 @@
     <div class="cta-banner reveal">
       <h2>Ne manquez aucun conseil technologique</h2>
       <p>Inscrivez-vous à notre newsletter pour recevoir nos articles et alertes de sécurité directement par email.</p>
-      <form class="newsletter-form" style="max-width:420px;margin:0 auto;">
-        <input type="email" placeholder="Votre email" required />
+      <form class="newsletter-form" id="newsletter-form" style="max-width:420px;margin:0 auto;">
+        <input type="email" id="newsletter-email" placeholder="Votre email" required />
         <button type="submit">S'abonner</button>
       </form>
+      <p class="form-note" id="newsletter-note" style="display:none;text-align:center;"></p>
     </div>
   </div>
 </section>
@@ -195,5 +196,43 @@
 <a href="#" class="back-to-top" aria-label="Retour en haut"><svg viewBox="0 0 24 24" fill="none"><path d="M12 19V5M5 12l7-7 7 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
 
 <script src="assets/js/main.js"></script>
+
+<!--
+  Inscription newsletter vers Supabase (table "newsletter_subscribers",
+  même projet que contact.html/quote.html/careers.html — mêmes
+  identifiants SUPABASE_URL / SUPABASE_ANON_KEY).
+-->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  var SUPABASE_URL = "https://uhhvcxmemgmfadjiokwy.supabase.co";
+  var SUPABASE_ANON_KEY = "sb_publishable_iceUY7Gp1oGy5IY6qGF48g_j-zY0md_";
+
+  document.addEventListener("DOMContentLoaded", function () {
+    var newsletterForm = document.getElementById("newsletter-form");
+    if (!newsletterForm || typeof supabase === "undefined") return;
+
+    var db = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    var newsletterNote = document.getElementById("newsletter-note");
+
+    newsletterForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var btn = newsletterForm.querySelector("button");
+      btn.disabled = true;
+
+      db.from("newsletter_subscribers").insert([{
+        email: document.getElementById("newsletter-email").value
+      }]).then(function (res) {
+        btn.disabled = false;
+        newsletterNote.style.display = "block";
+        if (res.error && res.error.code !== "23505") {
+          newsletterNote.textContent = "Une erreur est survenue. Réessayez plus tard.";
+        } else {
+          newsletterNote.textContent = res.error ? "Vous êtes déjà abonné(e) !" : "Merci ! Vous êtes bien abonné(e).";
+          newsletterForm.reset();
+        }
+      });
+    });
+  });
+</script>
 </body>
 </html>

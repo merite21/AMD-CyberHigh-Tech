@@ -86,9 +86,24 @@ create policy "Autoriser l'upload public des CV"
   to anon
   with check (bucket_id = 'job-applications-cv');
 
+-- 5. Abonnés newsletter (formulaire "Newsletter" du footer / blog.html)
+create table if not exists newsletter_subscribers (
+  id uuid primary key default gen_random_uuid(),
+  created_at timestamptz not null default now(),
+  email text not null unique
+);
+
+alter table newsletter_subscribers enable row level security;
+
+create policy "Autoriser l'insertion publique"
+  on newsletter_subscribers
+  for insert
+  to anon
+  with check (true);
+
 -- ============================================================
 -- Fin du script. Une fois exécuté :
 --   - Table Editor > contact_messages / quote_requests / job_applications
---     pour consulter les messages, devis et candidatures reçus.
+--     / newsletter_subscribers pour consulter les données reçues.
 --   - Storage > job-applications-cv pour télécharger les CV envoyés.
 -- ============================================================

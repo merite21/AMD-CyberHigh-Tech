@@ -225,10 +225,11 @@
       <div class="footer-col">
         <h4>Newsletter</h4>
         <p style="color:var(--text-dim);font-size:0.92rem;margin-bottom:16px;">Recevez nos alertes de sécurité et nos conseils technologiques.</p>
-        <form class="newsletter-form">
-          <input type="email" placeholder="Votre email" required />
+        <form class="newsletter-form" id="newsletter-form">
+          <input type="email" id="newsletter-email" placeholder="Votre email" required />
           <button type="submit">S'abonner</button>
         </form>
+        <p class="form-note" id="newsletter-note" style="display:none;"></p>
       </div>
     </div>
     <div class="footer-bottom">
@@ -328,6 +329,30 @@
         }
       });
     });
+
+    var newsletterForm = document.getElementById("newsletter-form");
+    if (newsletterForm) {
+      var newsletterNote = document.getElementById("newsletter-note");
+      newsletterForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+        var btn = newsletterForm.querySelector("button");
+        var originalText = btn.textContent;
+        btn.disabled = true;
+
+        db.from("newsletter_subscribers").insert([{
+          email: document.getElementById("newsletter-email").value
+        }]).then(function (res) {
+          btn.disabled = false;
+          newsletterNote.style.display = "block";
+          if (res.error && res.error.code !== "23505") {
+            newsletterNote.textContent = "Une erreur est survenue. Réessayez plus tard.";
+          } else {
+            newsletterNote.textContent = res.error ? "Vous êtes déjà abonné(e) !" : "Merci ! Vous êtes bien abonné(e).";
+            newsletterForm.reset();
+          }
+        });
+      });
+    }
   });
 </script>
 </body>

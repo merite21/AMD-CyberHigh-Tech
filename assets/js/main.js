@@ -185,16 +185,9 @@ document.addEventListener("DOMContentLoaded", function () {
   // scripts dédiés en bas de chaque page (envoi réel vers Supabase,
   // paiement Kkiapay pour le devis).
 
-  var newsletterForms = document.querySelectorAll(".newsletter-form");
-  newsletterForms.forEach(function (form) {
-    form.addEventListener("submit", function (e) {
-      e.preventDefault();
-      var btn = form.querySelector("button");
-      var original = btn.textContent;
-      btn.textContent = "Merci !";
-      setTimeout(function () { btn.textContent = original; form.reset(); }, 2200);
-    });
-  });
+  // L'inscription à la newsletter (formulaires .newsletter-form) est gérée
+  // par un script dédié en bas des pages qui en ont une (envoi réel vers
+  // Supabase, table "newsletter_subscribers").
 
   var backToTop = document.querySelector(".back-to-top");
   if (backToTop) {
