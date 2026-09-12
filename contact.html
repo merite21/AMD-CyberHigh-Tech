@@ -32,6 +32,7 @@
           <a href="blog.html">Blog</a>
           <a href="careers.html">Carrières</a>
           <a href="faq.html">FAQ</a>
+          <a href="temoignages.html">Témoignages</a>
         </div>
       </li>
       <li><a href="contact.html">Contact</a></li>
@@ -221,6 +222,7 @@
           <li><a href="team.html">Équipe AMD CyberHigh Tech</a></li>
           <li><a href="blog.html">Blog</a></li>
           <li><a href="careers.html">Carrières</a></li>
+          <li><a href="temoignages.html">Témoignages</a></li>
           <li><a href="contact.html">Contact</a></li>
         </ul>
       </div>
@@ -315,14 +317,19 @@
     var form = document.getElementById("contact-form");
     var successBox = document.getElementById("form-success");
     var errorBox = document.getElementById("form-error");
-    if (!form || typeof supabase === "undefined") return;
+    if (!form) return;
 
-    var db = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    var db = (typeof supabase !== "undefined") ? supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
 
     form.addEventListener("submit", function (e) {
       e.preventDefault();
       errorBox.classList.remove("show");
       successBox.classList.remove("show");
+
+      if (!db) {
+        errorBox.classList.add("show");
+        return;
+      }
 
       var submitBtn = form.querySelector("button[type='submit']");
       var originalText = submitBtn.textContent;
@@ -361,6 +368,13 @@
       var newsletterNote = document.getElementById("newsletter-note");
       newsletterForm.addEventListener("submit", function (e) {
         e.preventDefault();
+
+        if (!db) {
+          newsletterNote.style.display = "block";
+          newsletterNote.textContent = "Une erreur est survenue. Réessayez plus tard.";
+          return;
+        }
+
         var btn = newsletterForm.querySelector("button");
         var originalText = btn.textContent;
         btn.disabled = true;

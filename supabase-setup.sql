@@ -101,9 +101,39 @@ create policy "Autoriser l'insertion publique"
   to anon
   with check (true);
 
+-- 6. Témoignages (temoignages.html + accueil)
+-- Les visiteurs peuvent soumettre un avis, mais uniquement non approuvé
+-- (approved = false imposé côté base). Vous passez "approved" à true
+-- dans Table Editor une fois l'avis relu, pour qu'il devienne visible
+-- publiquement sur le site.
+create table if not exists testimonials (
+  id uuid primary key default gen_random_uuid(),
+  created_at timestamptz not null default now(),
+  name text not null,
+  company text,
+  rating smallint not null default 5 check (rating between 1 and 5),
+  message text not null,
+  approved boolean not null default false
+);
+
+alter table testimonials enable row level security;
+
+create policy "Autoriser l'insertion publique non approuvée"
+  on testimonials
+  for insert
+  to anon
+  with check (approved = false);
+
+create policy "Autoriser la lecture publique des avis approuvés"
+  on testimonials
+  for select
+  to anon
+  using (approved = true);
+
 -- ============================================================
 -- Fin du script. Une fois exécuté :
 --   - Table Editor > contact_messages / quote_requests / job_applications
---     / newsletter_subscribers pour consulter les données reçues.
+--     / newsletter_subscribers / testimonials pour consulter les données.
 --   - Storage > job-applications-cv pour télécharger les CV envoyés.
+--   - Pensez à passer "approved" à true sur les témoignages à publier.
 -- ============================================================

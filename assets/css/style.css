@@ -1152,6 +1152,20 @@ section {
 .testimonial-author .name { font-weight: 600; font-size: 0.95rem; }
 .testimonial-author .role { color: var(--text-mute); font-size: 13px; }
 
+.star-picker { display: flex; gap: 6px; }
+.star-picker .star {
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  line-height: 1;
+  color: var(--border);
+  cursor: pointer;
+  padding: 2px;
+  transition: color 0.15s var(--ease), transform 0.15s var(--ease);
+}
+.star-picker .star.active { color: var(--cyan-400); }
+.star-picker .star:hover { transform: scale(1.12); }
+
 /* ---------- CTA banner ---------- */
 
 .cta-banner {

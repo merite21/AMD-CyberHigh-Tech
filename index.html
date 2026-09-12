@@ -34,6 +34,7 @@
           <a href="blog.html">Blog</a>
           <a href="careers.html">Carrières</a>
           <a href="faq.html">FAQ</a>
+          <a href="temoignages.html">Témoignages</a>
         </div>
       </li>
       <li><a href="contact.html">Contact</a></li>
@@ -259,23 +260,11 @@
       <div class="eyebrow">Témoignages</div>
       <h2>La confiance de <span class="text-gradient">nos clients</span> parle d'elle-même</h2>
     </div>
-    <div class="grid grid-3">
-      <div class="testimonial-card reveal" style="--i:0">
-        <div class="stars">★★★★★</div>
-        <p class="quote">"AMD CyberHigh Tech a complètement transformé notre posture de sécurité. Leur équipe a détecté et neutralisé une faille critique avant qu'elle ne devienne un désastre."</p>
-        <div class="testimonial-author"><div class="avatar">SN</div><div><div class="name">Sarah N.</div><div class="role">DSI, NovaBank</div></div></div>
-      </div>
-      <div class="testimonial-card reveal" style="--i:1">
-        <div class="stars">★★★★★</div>
-        <p class="quote">"Migration cloud réalisée sans une seconde d'interruption. Le professionnalisme et la réactivité de l'équipe sont exceptionnels."</p>
-        <div class="testimonial-author"><div class="avatar">RK</div><div><div class="name">Rachid K.</div><div class="role">CTO, Portline Logistics</div></div></div>
-      </div>
-      <div class="testimonial-card reveal" style="--i:2">
-        <div class="stars">★★★★★</div>
-        <p class="quote">"La formation CyberHigh Academy a élevé le niveau technique de toute notre équipe IT. Un investissement qui a changé notre culture sécurité."</p>
-        <div class="testimonial-author"><div class="avatar">ML</div><div><div class="name">Marie L.</div><div class="role">RH, Universa Edu</div></div></div>
-      </div>
+    <div id="home-testimonials-empty" style="display:none;text-align:center;color:var(--text-dim);max-width:520px;margin:0 auto;">
+      Les premiers témoignages sont en cours de collecte.
+      <a href="temoignages.html">Découvrez comment laisser le vôtre →</a>
     </div>
+    <div id="home-testimonials-grid" class="grid grid-3"></div>
   </div>
 </section>
 
@@ -317,6 +306,7 @@
           <li><a href="team.html">Équipe AMD CyberHigh Tech</a></li>
           <li><a href="blog.html">Blog</a></li>
           <li><a href="careers.html">Carrières</a></li>
+          <li><a href="temoignages.html">Témoignages</a></li>
           <li><a href="contact.html">Contact</a></li>
         </ul>
       </div>
@@ -352,5 +342,64 @@
 <a href="#" class="back-to-top" aria-label="Retour en haut"><svg viewBox="0 0 24 24" fill="none"><path d="M12 19V5M5 12l7-7 7 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
 
 <script src="assets/js/main.js"></script>
+
+<!--
+  Affichage des 3 derniers témoignages approuvés (table "testimonials"
+  du même projet Supabase que le reste du site). Les avis sont soumis
+  et modérés depuis la page temoignages.html.
+-->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  var SUPABASE_URL = "https://uhhvcxmemgmfadjiokwy.supabase.co";
+  var SUPABASE_ANON_KEY = "sb_publishable_iceUY7Gp1oGy5IY6qGF48g_j-zY0md_";
+
+  document.addEventListener("DOMContentLoaded", function () {
+    var emptyEl = document.getElementById("home-testimonials-empty");
+    var gridEl = document.getElementById("home-testimonials-grid");
+    if (!gridEl) return;
+
+    var db = (typeof supabase !== "undefined") ? supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
+    if (!db) {
+      emptyEl.style.display = "block";
+      return;
+    }
+
+    function initials(name) {
+      return name.split(" ").map(function (p) { return p.charAt(0); }).join("").substring(0, 2).toUpperCase();
+    }
+
+    db.from("testimonials")
+      .select("name, company, rating, message")
+      .eq("approved", true)
+      .order("created_at", { ascending: false })
+      .limit(3)
+      .then(function (res) {
+        var rows = (res.data && !res.error) ? res.data : [];
+        if (!rows.length) {
+          emptyEl.style.display = "block";
+          return;
+        }
+        rows.forEach(function (t, i) {
+          var card = document.createElement("div");
+          card.className = "testimonial-card reveal";
+          card.style.setProperty("--i", i);
+          var stars = "★★★★★".substring(0, Math.max(1, Math.min(5, t.rating || 5)));
+          card.innerHTML =
+            '<div class="stars">' + stars + '</div>' +
+            '<p class="quote"></p>' +
+            '<div class="testimonial-author"><div class="avatar"></div><div><div class="name"></div><div class="role"></div></div></div>';
+          card.querySelector(".quote").textContent = '"' + t.message + '"';
+          card.querySelector(".avatar").textContent = initials(t.name || "?");
+          card.querySelector(".name").textContent = t.name || "";
+          card.querySelector(".role").textContent = t.company || "";
+          gridEl.appendChild(card);
+          card.classList.add("in-view");
+        });
+      })
+      .catch(function () {
+        emptyEl.style.display = "block";
+      });
+  });
+</script>
 </body>
 </html>

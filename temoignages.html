@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Les nouveautés en développement web et mobile — Blog AMD CyberHigh Tech</title>
-<meta name="description" content="IA embarquée, frameworks nouvelle génération, performance : ce qui change la façon de construire des produits numériques en 2026." />
+<title>Témoignages — AMD CyberHigh Tech</title>
+<meta name="description" content="Les avis de clients d'AMD CyberHigh Tech, et un espace pour partager votre propre expérience." />
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22><rect width=%2224%22 height=%2224%22 rx=%226%22 fill=%22%232f6fed%22/></svg>" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
@@ -49,60 +49,69 @@
   </div>
 </nav>
 
-<header class="page-hero" style="min-height:42vh;">
+<header class="page-hero">
   <div class="hero-glow"></div>
   <div class="container">
-    <div class="hero-content" style="max-width:760px;">
-      <div class="eyebrow">Développement</div>
-      <h1 style="font-size:clamp(1.9rem,3.6vw,2.8rem);">Les nouveautés en développement web et mobile à suivre en 2026</h1>
-      <div class="blog-meta" style="margin-top:8px;"><span>2 décembre 2025</span><span>·</span><span>6 min de lecture</span><span>·</span><span>Par Mérite AFFOGBOLO, Fondateur &amp; Développeur</span></div>
-      <div class="breadcrumb"><a href="index.html">Accueil</a><span class="sep">/</span><a href="blog.html">Blog</a><span class="sep">/</span><span class="current">Nouveautés en développement</span></div>
+    <div class="hero-content">
+      <div class="eyebrow">Témoignages</div>
+      <h1>Ce que nos clients <span class="text-gradient">disent de nous</span>.</h1>
+      <p class="lead">Des avis authentiques, publiés après validation. Vous avez travaillé avec nous ? Partagez votre expérience ci-dessous.</p>
+      <div class="breadcrumb"><a href="index.html">Accueil</a><span class="sep">/</span><span class="current">Témoignages</span></div>
     </div>
   </div>
 </header>
 
 <section style="padding-top:0;">
   <div class="container">
-    <div class="article-cover reveal">
-      <svg viewBox="0 0 24 24" fill="none"><path d="M12 14l9-5-9-5-9 5 9 5z" stroke="currentColor" stroke-width="1.1" stroke-linejoin="round"/><path d="M3 9v6l9 5 9-5V9" stroke="currentColor" stroke-width="1.1" stroke-linejoin="round"/></svg>
+    <div id="testimonials-loading" style="text-align:center;color:var(--text-dim);padding:40px 0;">Chargement des témoignages...</div>
+    <div id="testimonials-empty" style="display:none;text-align:center;color:var(--text-dim);padding:40px 0;max-width:520px;margin:0 auto;">
+      Aucun témoignage publié pour le moment. Soyez le premier à partager votre expérience avec AMD CyberHigh Tech !
     </div>
-
-    <div class="article-body reveal">
-      <p>Le développement web et mobile évolue vite. Voici les tendances qui, selon notre équipe technique, auront le plus d'impact sur la façon de construire des produits numériques performants et sécurisés cette année.</p>
-
-      <h2>L'IA intégrée directement dans les produits</h2>
-      <p>Au-delà des chatbots, l'intelligence artificielle s'intègre désormais nativement dans les applications — recherche intelligente, personnalisation en temps réel, automatisation de tâches complexes. Ce n'est plus une fonctionnalité expérimentale, mais un standard attendu par les utilisateurs.</p>
-
-      <h2>Des frameworks toujours plus rapides</h2>
-      <p>Les nouvelles générations d'outils de développement mettent l'accent sur la performance dès la conception : temps de chargement quasi instantanés, rendu optimisé, et une expérience fluide même sur des connexions limitées.</p>
-
-      <h2>La sécurité intégrée dès le code (DevSecOps)</h2>
-      <ul>
-        <li>Analyse automatisée des vulnérabilités à chaque déploiement.</li>
-        <li>Tests de sécurité intégrés directement dans le pipeline de développement.</li>
-        <li>Moins de failles découvertes en production, plus de confiance pour vos utilisateurs.</li>
-      </ul>
-
-      <h2>Le mobile hybride gagne en maturité</h2>
-      <p>Les applications hybrides permettent aujourd'hui d'atteindre des performances proches du natif tout en réduisant considérablement les coûts et délais de développement pour couvrir à la fois Android et iOS.</p>
-
-      <h2>Une expérience utilisateur plus accessible</h2>
-      <p>L'accessibilité numérique n'est plus une option : elle devient un critère de qualité et, dans de nombreux secteurs, une obligation réglementaire. Concevoir pour tous les utilisateurs dès le départ évite des refontes coûteuses plus tard.</p>
-
-      <p>Chez AMD CyberHigh Tech, nous intégrons ces bonnes pratiques dans chaque projet, pour livrer des produits qui restent performants, sécurisés et faciles à faire évoluer sur le long terme.</p>
-    </div>
+    <div id="testimonials-grid" class="grid grid-3"></div>
   </div>
 </section>
 
-<section>
+<section style="padding-top:0;">
   <div class="container">
-    <div class="cta-banner reveal">
-      <h2>Envie de moderniser votre produit numérique ?</h2>
-      <p>Parlons de votre projet et voyons comment l'intégrer aux dernières bonnes pratiques.</p>
-      <div class="cta-actions">
-        <a href="quote.html" class="btn btn-primary">Demander un devis</a>
-        <a href="blog.html" class="btn btn-ghost">Voir d'autres articles</a>
-      </div>
+    <div class="card reveal" style="max-width:640px;margin:0 auto;">
+      <h3 style="font-size:1.4rem;margin-bottom:8px;">Laisser un avis</h3>
+      <p style="color:var(--text-dim);margin-bottom:24px;">Votre avis sera publié sur cette page après relecture, pour garantir des témoignages authentiques.</p>
+      <form id="testimonial-form">
+        <div class="form-grid">
+          <div class="field">
+            <label for="t-name">Votre nom</label>
+            <input type="text" id="t-name" name="name" placeholder="Jean Dupont" required />
+          </div>
+          <div class="field">
+            <label for="t-company">Entreprise (facultatif)</label>
+            <input type="text" id="t-company" name="company" placeholder="Nom de votre entreprise" />
+          </div>
+          <div class="field full">
+            <label>Votre note</label>
+            <div class="star-picker" id="star-picker">
+              <button type="button" class="star" data-value="1" aria-label="1 étoile">★</button>
+              <button type="button" class="star" data-value="2" aria-label="2 étoiles">★</button>
+              <button type="button" class="star" data-value="3" aria-label="3 étoiles">★</button>
+              <button type="button" class="star" data-value="4" aria-label="4 étoiles">★</button>
+              <button type="button" class="star" data-value="5" aria-label="5 étoiles">★</button>
+            </div>
+            <input type="hidden" id="t-rating" name="rating" value="5" />
+          </div>
+          <div class="field full">
+            <label for="t-message">Votre avis</label>
+            <textarea id="t-message" name="message" placeholder="Décrivez votre expérience avec AMD CyberHigh Tech..." required></textarea>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block" style="margin-top:22px;">Envoyer mon avis</button>
+        <div class="form-error" id="testimonial-error">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 9v4M12 17h.01" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/></svg>
+          Une erreur est survenue. Réessayez, ou contactez-nous directement par WhatsApp.
+        </div>
+        <div class="form-success" id="testimonial-success">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Merci ! Votre avis a bien été reçu et sera publié après validation.
+        </div>
+      </form>
     </div>
   </div>
 </section>
@@ -168,5 +177,120 @@
 <a href="#" class="back-to-top" aria-label="Retour en haut"><svg viewBox="0 0 24 24" fill="none"><path d="M12 19V5M5 12l7-7 7 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
 
 <script src="assets/js/main.js"></script>
+
+<!--
+  Témoignages réels via Supabase (mêmes identifiants que le reste du
+  site). Les visiteurs peuvent soumettre un avis (statut "en attente"),
+  seuls les avis marqués approved = true dans Table Editor >
+  testimonials s'affichent publiquement sur cette page et sur l'accueil.
+  Exécutez la table du script SQL fourni (testimonials) avant utilisation.
+-->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  var SUPABASE_URL = "https://uhhvcxmemgmfadjiokwy.supabase.co";
+  var SUPABASE_ANON_KEY = "sb_publishable_iceUY7Gp1oGy5IY6qGF48g_j-zY0md_";
+
+  document.addEventListener("DOMContentLoaded", function () {
+    var db = (typeof supabase !== "undefined") ? supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
+
+    var loadingEl = document.getElementById("testimonials-loading");
+    var emptyEl = document.getElementById("testimonials-empty");
+    var gridEl = document.getElementById("testimonials-grid");
+
+    function initials(name) {
+      return name.split(" ").map(function (p) { return p.charAt(0); }).join("").substring(0, 2).toUpperCase();
+    }
+
+    if (db) {
+      db.from("testimonials")
+        .select("name, company, rating, message")
+        .eq("approved", true)
+        .order("created_at", { ascending: false })
+        .limit(9)
+        .then(function (res) {
+          loadingEl.style.display = "none";
+          var rows = (res.data && !res.error) ? res.data : [];
+          if (!rows.length) {
+            emptyEl.style.display = "block";
+            return;
+          }
+          rows.forEach(function (t) {
+            var card = document.createElement("div");
+            card.className = "testimonial-card reveal in-view";
+            var stars = "★★★★★".substring(0, Math.max(1, Math.min(5, t.rating || 5)));
+            card.innerHTML =
+              '<div class="stars">' + stars + '</div>' +
+              '<p class="quote"></p>' +
+              '<div class="testimonial-author"><div class="avatar"></div><div><div class="name"></div><div class="role"></div></div></div>';
+            card.querySelector(".quote").textContent = '"' + t.message + '"';
+            card.querySelector(".avatar").textContent = initials(t.name || "?");
+            card.querySelector(".name").textContent = t.name || "";
+            card.querySelector(".role").textContent = t.company || "";
+            gridEl.appendChild(card);
+          });
+        })
+        .catch(function () {
+          loadingEl.style.display = "none";
+          emptyEl.style.display = "block";
+        });
+    } else {
+      loadingEl.style.display = "none";
+      emptyEl.style.display = "block";
+    }
+
+    // Sélecteur d'étoiles (fonctionne indépendamment de Supabase)
+    var starPicker = document.getElementById("star-picker");
+    var ratingInput = document.getElementById("t-rating");
+    function setStars(value) {
+      ratingInput.value = value;
+      starPicker.querySelectorAll(".star").forEach(function (s) {
+        s.classList.toggle("active", parseInt(s.getAttribute("data-value"), 10) <= value);
+      });
+    }
+    setStars(5);
+    starPicker.querySelectorAll(".star").forEach(function (s) {
+      s.addEventListener("click", function () { setStars(parseInt(s.getAttribute("data-value"), 10)); });
+    });
+
+    // Formulaire de soumission
+    var form = document.getElementById("testimonial-form");
+    var successBox = document.getElementById("testimonial-success");
+    var errorBox = document.getElementById("testimonial-error");
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      errorBox.classList.remove("show");
+      successBox.classList.remove("show");
+
+      if (!db) {
+        errorBox.classList.add("show");
+        return;
+      }
+
+      var submitBtn = form.querySelector("button[type='submit']");
+      var originalText = submitBtn.textContent;
+      submitBtn.textContent = "Envoi en cours...";
+      submitBtn.disabled = true;
+
+      db.from("testimonials").insert([{
+        name: form.name.value,
+        company: form.company.value,
+        rating: parseInt(ratingInput.value, 10),
+        message: form.message.value,
+        approved: false
+      }]).then(function (res) {
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+        if (res.error) {
+          errorBox.classList.add("show");
+        } else {
+          successBox.classList.add("show");
+          form.reset();
+          setStars(5);
+        }
+      });
+    });
+  });
+</script>
 </body>
 </html>
