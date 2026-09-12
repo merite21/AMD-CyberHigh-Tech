@@ -1872,13 +1872,13 @@ footer {
 
 .team-card {
   text-align: center;
-  padding: 24px 24px 34px;
+  padding: 34px 24px;
 }
 
 .team-avatar {
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  border-radius: var(--radius);
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
   margin: 0 auto 20px;
   background: var(--gradient-brand);
   display: flex;
