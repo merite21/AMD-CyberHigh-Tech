@@ -196,4 +196,107 @@ document.addEventListener("DOMContentLoaded", function () {
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
   }
+
+  // ---------- Assistant FAQ (chatbot simple, sans backend ni IA) ----------
+  (function () {
+    var KB = [
+      { k: ["bonjour", "salut", "bonsoir", "hello", "coucou"], a: "Bonjour ! Je suis l'assistant AMD CyberHigh Tech. Posez-moi une question sur nos services, nos tarifs ou nos délais." },
+      { k: ["merci"], a: "Avec plaisir ! N'hésitez pas si vous avez d'autres questions." },
+      { k: ["prix", "tarif", "tarifs", "cout", "combien coute", "combien ca coute", "budget"], a: "Un site vitrine démarre autour de 900 000 FCFA (≈ 1 372 €), une application web ou e-commerce complexe peut aller de 3 000 000 à plus de 18 000 000 FCFA. Demandez un devis gratuit pour un chiffrage précis, sur la page \"Demander un devis\"." },
+      { k: ["devis"], a: "Le premier devis est gratuit et sans engagement : décrivez votre projet sur la page \"Demander un devis\", vous recevez une proposition par email sous 48h ouvrées." },
+      { k: ["paiement echelonne", "plusieurs fois", "versement", "acompte"], a: "Oui, la plupart des projets sont facturés en plusieurs versements liés aux étapes clés (démarrage, validation, livraison finale)." },
+      { k: ["delai", "combien de temps", "duree"], a: "Un site vitrine prend généralement 2 à 4 semaines, une application web ou mobile de 6 à 12 semaines selon la complexité. Le délai précis est indiqué dans votre devis." },
+      { k: ["comment ca se passe", "deroulement", "collaboration", "methode"], a: "Vous êtes accompagné par un chef de projet dédié, avec des points d'étape réguliers et des délais clairement communiqués à chaque phase." },
+      { k: ["android", "ios", "iphone", "application mobile", "app mobile", "appli mobile"], a: "Oui, nous développons des applications natives Android et iPhone, ainsi que des applications hybrides couvrant les deux plateformes." },
+      { k: ["evoluer", "ajouter des fonctionnalites", "nouvelles pages", "mise a jour du site"], a: "Absolument, tous nos projets sont conçus pour évoluer facilement après leur lancement : nouvelles fonctionnalités, pages ou intégrations." },
+      { k: ["proprietaire", "code source", "propriete intellectuelle"], a: "Une fois le projet livré et payé, vous êtes pleinement propriétaire du code source, du contenu et de tous les livrables." },
+      { k: ["maintenance", "support", "apres livraison"], a: "Oui, nous proposons des forfaits de maintenance mensuelle incluant mises à jour, sauvegardes, surveillance de sécurité et support technique prioritaire." },
+      { k: ["pirate", "hack", "incident", "cyberattaque", "securite critique"], a: "En cas d'incident de sécurité critique, notre équipe intervient rapidement pour isoler la menace, limiter les dégâts et vous accompagner dans la remédiation." },
+      { k: ["petite entreprise", "startup", "grande entreprise", "toutes tailles"], a: "Oui, des startups aux entreprises établies, nos solutions s'adaptent à votre taille, votre secteur et votre budget." },
+      { k: ["cybersecurite", "securite", "audit"], a: "Nous proposons de l'audit de sécurité, la protection des données et la mise en place de bonnes pratiques, intégrés dès la conception de vos projets." },
+      { k: ["services", "que faites vous", "que proposez vous"], a: "Développement web, développement mobile, cybersécurité, cloud & infrastructure, et design graphique. Voir le détail sur la page \"Services\"." },
+      { k: ["contact", "telephone", "joindre", "email"], a: "Vous pouvez nous contacter au +229 01 62 62 08 87 (WhatsApp inclus) ou par email à affogbolodilanemerite@gmail.com, du lundi au vendredi 8h-19h." },
+      { k: ["ou etes vous", "localisation", "adresse", "benin", "cotonou", "base a"], a: "AMD CyberHigh Tech est basée à Cotonou, au Bénin, et accompagne des clients au Bénin comme à l'international." },
+      { k: ["rendez vous", "rdv", "reunion", "appel"], a: "Vous pouvez réserver directement un créneau dans l'agenda depuis la page Contact, avec le bouton \"Prendre rendez-vous\"." }
+    ];
+    var FALLBACK = "Je n'ai pas de réponse toute prête pour cette question. Le plus simple : contactez directement Mérite via WhatsApp ou le formulaire de contact, il vous répondra sous 24h.";
+
+    function normalize(str) {
+      return str.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^a-z0-9]+/g, " ");
+    }
+
+    function findAnswer(question) {
+      var q = normalize(question);
+      var best = null, bestScore = 0;
+      KB.forEach(function (entry) {
+        var score = 0;
+        entry.k.forEach(function (kw) {
+          if (q.indexOf(normalize(kw)) !== -1) score += kw.length;
+        });
+        if (score > bestScore) { bestScore = score; best = entry; }
+      });
+      return best ? best.a : FALLBACK;
+    }
+
+    var wrap = document.createElement("div");
+    wrap.className = "amd-chat";
+    wrap.innerHTML =
+      '<button type="button" class="amd-chat-toggle" aria-label="Assistant AMD CyberHigh Tech">' +
+        '<svg class="icon-chat" viewBox="0 0 24 24" fill="none"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
+        '<svg class="icon-close" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>' +
+      '</button>' +
+      '<div class="amd-chat-panel">' +
+        '<div class="amd-chat-header">' +
+          '<div><strong>Assistant AMD CyberHigh Tech</strong><span>Répond aux questions fréquentes</span></div>' +
+          '<button type="button" class="amd-chat-close" aria-label="Fermer">&times;</button>' +
+        '</div>' +
+        '<div class="amd-chat-messages"></div>' +
+        '<form class="amd-chat-form">' +
+          '<input type="text" placeholder="Posez votre question..." aria-label="Votre question" />' +
+          '<button type="submit">Envoyer</button>' +
+        '</form>' +
+      '</div>';
+    document.body.appendChild(wrap);
+
+    var toggleBtn = wrap.querySelector(".amd-chat-toggle");
+    var closeBtn = wrap.querySelector(".amd-chat-close");
+    var messages = wrap.querySelector(".amd-chat-messages");
+    var chatForm = wrap.querySelector(".amd-chat-form");
+    var input = chatForm.querySelector("input");
+    var greeted = false;
+
+    function addMessage(text, who) {
+      var el = document.createElement("div");
+      el.className = "amd-chat-msg " + who;
+      el.textContent = text;
+      messages.appendChild(el);
+      messages.scrollTop = messages.scrollHeight;
+    }
+
+    function openChat() {
+      wrap.classList.add("open");
+      if (!greeted) {
+        addMessage("Bonjour ! Je suis l'assistant AMD CyberHigh Tech. Posez-moi une question sur nos services, nos tarifs ou nos délais.", "bot");
+        greeted = true;
+      }
+      input.focus();
+    }
+
+    toggleBtn.addEventListener("click", function () {
+      if (wrap.classList.contains("open")) wrap.classList.remove("open");
+      else openChat();
+    });
+    closeBtn.addEventListener("click", function () { wrap.classList.remove("open"); });
+
+    chatForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var q = input.value.trim();
+      if (!q) return;
+      addMessage(q, "user");
+      input.value = "";
+      setTimeout(function () {
+        addMessage(findAnswer(q), "bot");
+      }, 400);
+    });
+  })();
 });

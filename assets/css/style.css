@@ -1988,6 +1988,122 @@ footer {
 
 .back-to-top svg { width: 20px; height: 20px; color: #04070f; }
 
+/* ---------- Assistant FAQ (chatbot) ---------- */
+
+.amd-chat-toggle {
+  position: fixed;
+  bottom: 94px;
+  right: 28px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--gradient-brand);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-glow);
+  z-index: 950;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.3s var(--ease);
+}
+
+.amd-chat-toggle:hover { transform: translateY(-4px) scale(1.05); }
+.amd-chat-toggle svg { width: 24px; height: 24px; color: #04070f; }
+.amd-chat-toggle .icon-close { display: none; }
+.amd-chat.open .amd-chat-toggle .icon-chat { display: none; }
+.amd-chat.open .amd-chat-toggle .icon-close { display: block; }
+
+.amd-chat-panel {
+  position: fixed;
+  bottom: 158px;
+  right: 28px;
+  width: 340px;
+  max-width: calc(100vw - 40px);
+  max-height: 460px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 950;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(16px);
+  transition: all 0.3s var(--ease);
+}
+
+.amd-chat.open .amd-chat-panel {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.amd-chat-header {
+  background: var(--gradient-brand);
+  color: #04070f;
+  padding: 16px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+}
+
+.amd-chat-header strong { display: block; font-family: "Space Grotesk", sans-serif; font-size: 0.95rem; }
+.amd-chat-header span { display: block; font-size: 0.75rem; opacity: 0.8; margin-top: 2px; }
+.amd-chat-close { background: none; border: none; color: #04070f; font-size: 1.3rem; cursor: pointer; line-height: 1; padding: 4px; }
+
+.amd-chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 200px;
+}
+
+.amd-chat-msg { max-width: 85%; padding: 10px 14px; border-radius: 14px; font-size: 0.85rem; line-height: 1.45; }
+.amd-chat-msg.bot { background: var(--surface-3); color: var(--text); align-self: flex-start; border-bottom-left-radius: 4px; }
+.amd-chat-msg.user { background: var(--gradient-brand); color: #04070f; align-self: flex-end; border-bottom-right-radius: 4px; }
+
+.amd-chat-form {
+  display: flex;
+  gap: 8px;
+  padding: 12px;
+  border-top: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.amd-chat-form input {
+  flex: 1;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 12px;
+  color: var(--text);
+  font-size: 0.85rem;
+  font-family: inherit;
+}
+
+.amd-chat-form button {
+  background: var(--gradient-brand);
+  color: #04070f;
+  border: none;
+  border-radius: 10px;
+  padding: 0 16px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+@media (max-width: 480px) {
+  .amd-chat-panel { right: 16px; left: 16px; width: auto; bottom: 150px; }
+  .amd-chat-toggle { right: 16px; }
+}
+
 /* ---------- Marquee (trusted logos) ---------- */
 
 .marquee-wrap {
