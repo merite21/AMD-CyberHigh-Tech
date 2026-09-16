@@ -44,12 +44,12 @@
 
 :root[data-theme="light"] {
   color-scheme: light;
-  --bg: #eef2fb;
-  --bg-alt: #e3eaf9;
-  --surface: #f6f9fe;
-  --surface-2: #eaf1fc;
-  --surface-3: #dfe9fa;
-  --border: rgba(15, 31, 61, 0.09);
+  --bg: #cfe0f7;
+  --bg-alt: #bcd4f2;
+  --surface: #dceaf9;
+  --surface-2: #cde1f6;
+  --surface-3: #b9d2f0;
+  --border: rgba(15, 31, 61, 0.14);
   --border-strong: rgba(29, 78, 216, 0.3);
   --text: #0b1626;
   --text-dim: #48597a;
