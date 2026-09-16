@@ -474,7 +474,8 @@ section {
     margin-top: 14px;
     text-align: center;
   }
-  .nav-item-dropdown.open .dropdown-panel { display: block; }
+  .nav-item-dropdown.open .dropdown-panel,
+  .nav-item-dropdown:hover .dropdown-panel { display: block; transform: none; }
   .dropdown-trigger { justify-content: center; font-size: 22px; margin: 0 auto; }
   .dropdown-panel a { font-size: 17px; color: var(--text-dim); padding: 12px; }
 }
