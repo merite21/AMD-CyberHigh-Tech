@@ -182,8 +182,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // Les formulaires contact, devis et candidature sont gérés par des
-  // scripts dédiés en bas de chaque page (envoi réel vers Supabase,
-  // paiement Kkiapay pour le devis).
+  // scripts dédiés en bas de chaque page (envoi réel vers Supabase).
 
   // L'inscription à la newsletter (formulaires .newsletter-form) est gérée
   // par un script dédié en bas des pages qui en ont une (envoi réel vers
@@ -216,7 +215,7 @@ document.addEventListener("DOMContentLoaded", function () {
       { k: ["cybersecurite", "securite", "audit"], a: "Nous proposons de l'audit de sécurité, la protection des données et la mise en place de bonnes pratiques, intégrés dès la conception de vos projets." },
       { k: ["services", "que faites vous", "que proposez vous"], a: "Développement web, développement mobile, cybersécurité, cloud & infrastructure, et design graphique. Voir le détail sur la page \"Services\"." },
       { k: ["contact", "telephone", "joindre", "email"], a: "Vous pouvez nous contacter au +229 01 62 62 08 87 (WhatsApp inclus) ou par email à affogbolodilanemerite@gmail.com, du lundi au vendredi 8h-19h." },
-      { k: ["ou etes vous", "localisation", "adresse", "benin", "cotonou", "base a"], a: "AMD CyberHigh Tech est basée à Cotonou, au Bénin, et accompagne des clients au Bénin comme à l'international." },
+      { k: ["ou etes vous", "localisation", "adresse", "benin", "cotonou", "base a"], a: "AMD CyberHigh Tech est basée au Bénin, en freelance, et accompagne des clients au Bénin comme à l'international, notamment en Europe et en Amérique." },
       { k: ["rendez vous", "rdv", "reunion", "appel"], a: "Vous pouvez réserver directement un créneau dans l'agenda depuis la page Contact, avec le bouton \"Prendre rendez-vous\"." }
     ];
     var FALLBACK = "Je n'ai pas de réponse toute prête pour cette question. Le plus simple : contactez directement Mérite via WhatsApp ou le formulaire de contact, il vous répondra sous 24h.";

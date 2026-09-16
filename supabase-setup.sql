@@ -32,7 +32,7 @@ create policy "Autoriser l'insertion publique"
   to anon
   with check (true);
 
--- 2. Demandes de devis payantes (quote.html, après paiement Kkiapay)
+-- 2. Demandes de devis (quote.html)
 create table if not exists quote_requests (
   id uuid primary key default gen_random_uuid(),
   created_at timestamptz not null default now(),
@@ -41,9 +41,7 @@ create table if not exists quote_requests (
   email text,
   phone text,
   service text,
-  budget text,
-  description text,
-  payment_transaction_id text
+  description text
 );
 
 alter table quote_requests enable row level security;

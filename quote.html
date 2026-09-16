@@ -74,8 +74,8 @@
               <input type="text" id="q-name" name="name" placeholder="Jean Dupont" required />
             </div>
             <div class="field">
-              <label for="q-company">Entreprise</label>
-              <input type="text" id="q-company" name="company" placeholder="Nom de votre entreprise" />
+              <label for="q-company">Entreprise (optionnel)</label>
+              <input type="text" id="q-company" name="company" placeholder="Nom de votre entreprise, si applicable" />
             </div>
             <div class="field">
               <label for="q-email">Email</label>
@@ -83,12 +83,12 @@
             </div>
             <div class="field">
               <label for="q-phone">Téléphone</label>
-              <input type="tel" id="q-phone" name="phone" placeholder="+229 __ __ __ __ __" required />
+              <input type="tel" id="q-phone" name="phone" placeholder="Votre numéro de téléphone" required />
             </div>
-            <div class="field">
+            <div class="field full">
               <label for="q-service">Service concerné</label>
               <select id="q-service" name="service">
-                <option>Développement Web</option>
+                <option>Sites web de toutes sortes</option>
                 <option>Développement Mobile</option>
                 <option>Cybersécurité</option>
                 <option>Cloud &amp; Infrastructure</option>
@@ -97,33 +97,22 @@
                 <option>Plusieurs services</option>
               </select>
             </div>
-            <div class="field">
-              <label for="q-budget">Budget estimé</label>
-              <select id="q-budget" name="budget">
-                <option>Moins de 1 200 000 FCFA (≈ 1 829 € / 1 967 $)</option>
-                <option>1 200 000 – 3 000 000 FCFA (≈ 1 829 € – 4 573 €)</option>
-                <option>3 000 000 – 9 000 000 FCFA (≈ 4 573 € – 13 720 €)</option>
-                <option>9 000 000 – 30 000 000 FCFA (≈ 13 720 € – 45 736 €)</option>
-                <option>Plus de 30 000 000 FCFA (≈ 45 736 € / 49 180 $)</option>
-                <option>Je ne sais pas encore</option>
-              </select>
-            </div>
             <div class="field full">
               <label for="q-desc">Description du projet</label>
               <textarea id="q-desc" name="description" placeholder="Décrivez votre projet, vos objectifs, vos délais souhaités..." required></textarea>
             </div>
           </div>
-          <button type="button" id="quote-pay-btn" class="btn btn-primary btn-block" style="margin-top:26px;">
-            Payer 1 305 FCFA <span style="opacity:.85;font-weight:500;">(≈ 1,99 € / 2,14 $)</span> et envoyer
+          <button type="submit" id="quote-submit-btn" class="btn btn-primary btn-block" style="margin-top:26px;">
+            Envoyer ma demande
           </button>
-          <p class="form-note">Des frais de traitement de 1 305 FCFA (≈ 1,99 € / 2,14 $) s'appliquent à l'envoi de chaque demande de devis, via Mobile Money ou carte bancaire. Vous recevrez votre devis personnalisé par email sous 48h ouvrées.</p>
-          <div class="form-error" id="quote-payment-error">
+          <p class="form-note">Vous recevrez votre devis personnalisé par email sous 48h ouvrées, avec le montant de votre projet.</p>
+          <div class="form-error" id="quote-error">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 9v4M12 17h.01" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/></svg>
-            Le paiement a échoué ou a été annulé. Veuillez réessayer.
+            Une erreur est survenue lors de l'envoi. Veuillez réessayer ou nous contacter directement.
           </div>
           <div class="form-success" id="quote-success">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <span>Paiement confirmé ! Votre demande a été envoyée. Vous recevrez votre devis par email sous 48h ouvrées.<br><span class="tx-ref" style="opacity:.75;font-size:12px;"></span></span>
+            <span>Votre demande a été envoyée. Vous recevrez votre devis par email sous 48h ouvrées.</span>
           </div>
         </form>
       </div>
@@ -202,7 +191,7 @@
       </div>
       <div class="footer-col">
         <h4>Contact</h4>
-        <div class="contact-line"><svg viewBox="0 0 24 24" fill="none"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0118 0z" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="1.6"/></svg><span>Cotonou, Bénin</span></div>
+        <div class="contact-line"><svg viewBox="0 0 24 24" fill="none"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0118 0z" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="1.6"/></svg><span>Bénin</span></div>
         <div class="contact-line"><svg viewBox="0 0 24 24" fill="none"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3 19.5 19.5 0 01-6-6 19.8 19.8 0 01-3-8.7A2 2 0 014.1 2h3a2 2 0 012 1.7c.1 1 .3 2 .7 3a2 2 0 01-.5 2.1L8 10.1a16 16 0 006 6l1.3-1.3a2 2 0 012.1-.5c1 .4 2 .6 3 .7a2 2 0 011.6 2z" stroke="currentColor" stroke-width="1.6"/></svg><span>+229 01 62 62 08 87</span></div>
         <div class="contact-line"><svg viewBox="0 0 24 24" fill="none"><path d="M4 4h16v16H4V4z" stroke="currentColor" stroke-width="1.6"/><path d="M4 6l8 7 8-7" stroke="currentColor" stroke-width="1.6"/></svg><span>affogbolodilanemerite@gmail.com</span></div>
       </div>
@@ -224,23 +213,7 @@
 <script src="assets/js/main.js"></script>
 
 <!--
-  Paiement Kkiapay avant envoi de la demande de devis.
-  Clé publique sandbox configurée — la clé privée Kkiapay ne doit JAMAIS
-  apparaître ici ni dans aucun fichier du site : elle sert uniquement aux
-  appels serveur à serveur (vérification de transaction), pas au widget
-  côté navigateur. Gardez-la uniquement dans le tableau de bord Kkiapay.
-  Une fois les tests en sandbox validés, remplacez la clé ci-dessous par
-  votre clé publique de PRODUCTION et passez KKIAPAY_SANDBOX à false.
-  Cette intégration suit l'API documentée par Kkiapay (openKkiapayWidget /
-  addSuccessListener / addFailedListener) au moment de l'écriture — accès
-  direct à docs.kkiapay.me bloqué depuis cet environnement de développement,
-  donc vérifiez les noms de paramètres sur https://docs.kkiapay.me si le
-  widget ne s'ouvre pas comme attendu.
--->
-<script src="https://cdn.kkiapay.me/k.js"></script>
-
-<!--
-  Enregistrement de la demande de devis dans Supabase (après paiement).
+  Enregistrement de la demande de devis dans Supabase.
   Même projet Supabase que pour le formulaire de contact — utilisez la
   même URL et la même clé "anon public" ci-dessous, et exécutez le
   script SQL fourni pour créer la table "quote_requests".
@@ -254,8 +227,6 @@
 -->
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
-  var KKIAPAY_PUBLIC_KEY = "53ca95d0a5e711f186326d7e08920f27";
-  var KKIAPAY_SANDBOX = true;
   var SUPABASE_URL = "https://uhhvcxmemgmfadjiokwy.supabase.co";
   var SUPABASE_ANON_KEY = "sb_publishable_iceUY7Gp1oGy5IY6qGF48g_j-zY0md_";
   var EMAILJS_PUBLIC_KEY = "K-_fqjjs1vHaeZAzZ";
@@ -273,81 +244,53 @@
 
   document.addEventListener("DOMContentLoaded", function () {
     var quoteForm = document.getElementById("quote-form");
-    var payBtn = document.getElementById("quote-pay-btn");
     var successBox = document.getElementById("quote-success");
-    var errorBox = document.getElementById("quote-payment-error");
-    if (!quoteForm || !payBtn) return;
+    var errorBox = document.getElementById("quote-error");
+    if (!quoteForm) return;
 
     var db = (typeof supabase !== "undefined")
       ? supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
       : null;
 
-    payBtn.addEventListener("click", function () {
+    quoteForm.addEventListener("submit", function (e) {
+      e.preventDefault();
       errorBox.classList.remove("show");
       successBox.classList.remove("show");
       if (!quoteForm.reportValidity()) return;
 
-      if (typeof openKkiapayWidget !== "function") {
+      if (!db) {
         errorBox.classList.add("show");
         return;
       }
 
-      openKkiapayWidget({
-        amount: 1305,
-        key: KKIAPAY_PUBLIC_KEY,
-        sandbox: KKIAPAY_SANDBOX,
-        data: "Demande de devis - AMD CyberHigh Tech",
-        theme: "#2f6fed",
-        position: "center"
-      });
-    });
-
-    if (typeof addSuccessListener === "function") {
-      addSuccessListener(function (response) {
-        var txId = response && response.transactionId ? response.transactionId : "";
-
-        if (db) {
-          db.from("quote_requests").insert([{
-            full_name: quoteForm.name.value,
-            company: quoteForm.company.value,
-            email: quoteForm.email.value,
-            phone: quoteForm.phone.value,
-            service: quoteForm.service.value,
-            budget: quoteForm.budget.value,
-            description: quoteForm.description.value,
-            payment_transaction_id: txId
-          }]).then(function (res) {
-            if (res.error) console.error("Supabase insert error:", res.error);
-          });
+      db.from("quote_requests").insert([{
+        full_name: quoteForm.name.value,
+        company: quoteForm.company.value,
+        email: quoteForm.email.value,
+        phone: quoteForm.phone.value,
+        service: quoteForm.service.value,
+        description: quoteForm.description.value
+      }]).then(function (res) {
+        if (res.error) {
+          console.error("Supabase insert error:", res.error);
+          errorBox.classList.add("show");
+          return;
         }
 
         sendEmailNotification({
-          title: "Nouvelle demande de devis (payée)",
+          title: "Nouvelle demande de devis",
           name: quoteForm.name.value,
           email: quoteForm.email.value,
           message: "Téléphone : " + quoteForm.phone.value +
             "\nEntreprise : " + quoteForm.company.value +
             "\nService : " + quoteForm.service.value +
-            "\nBudget : " + quoteForm.budget.value +
-            "\nRéférence de paiement : " + txId +
             "\n\n" + quoteForm.description.value
         });
 
         successBox.classList.add("show");
-        errorBox.classList.remove("show");
-        var ref = successBox.querySelector(".tx-ref");
-        if (ref && txId) {
-          ref.textContent = "Référence de paiement : " + txId;
-        }
         quoteForm.reset();
       });
-    }
-
-    if (typeof addFailedListener === "function") {
-      addFailedListener(function () {
-        errorBox.classList.add("show");
-      });
-    }
+    });
   });
 </script>
 </body>
