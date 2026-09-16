@@ -9,7 +9,6 @@ Site web vitrine pour AMD CyberHigh Tech — développement web/mobile, cybersé
 ├── about.html                          À propos (histoire, valeurs, timeline, équipe)
 ├── services.html                       Services détaillés, formules tarifaires, FAQ
 ├── portfolio.html                      Études de cas / réalisations avec filtres
-├── team.html                           Équipe complète
 ├── blog.html                           Liste des articles
 ├── blog-proteger-entreprise.html       Article : cybersécurité
 ├── blog-site-web.html                  Article : pourquoi créer un site web
