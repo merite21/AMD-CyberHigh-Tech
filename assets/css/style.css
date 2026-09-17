@@ -539,7 +539,11 @@ section {
 @media (max-width: 960px) {
   .nav-links {
     position: fixed;
-    inset: 0;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
     background: rgba(6, 11, 22, 0.98);
     backdrop-filter: blur(20px);
     flex-direction: column;
